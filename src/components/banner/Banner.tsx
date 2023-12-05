@@ -1,9 +1,16 @@
 import { useAppTheme } from "@/hooks";
-import React from "react";
+import React, { type FC } from "react";
 import { Button } from "..";
 import { renderBannerStyles } from "@/utils";
 
-const Banner = () => {
+type BannerProps = {
+  title: string;
+  description: string;
+  textBtn: string;
+  onClick?: <T>(arg?: T) => void;
+};
+
+const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
   const {
     state: { times },
   } = useAppTheme();
@@ -20,19 +27,20 @@ const Banner = () => {
       <h1
         className={`text-[7rem] text-center max-lg:text-[5rem] max-md-[5rem] max-sm:[2rem] font-semibold bg-gradient-to-r ${_styles?.headerColor} inline-block text-transparent bg-clip-text`}
       >
-        Khoom Khoom
+        {title}
       </h1>
       <p className="text-2xl max-md:text-xl text-foreground-400">
-        Find the best product price for you.
+        {description}
       </p>
 
       <Button
+        onClick={onClick}
         className={`mt-5 text-lg ${
           times.isNight ? "text-foreground-100" : "text-gray-400"
         }`}
         variant="bordered"
       >
-        Get started
+        {textBtn}
       </Button>
     </section>
   );

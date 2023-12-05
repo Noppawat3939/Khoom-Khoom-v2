@@ -1,7 +1,6 @@
 import { useAppTheme } from "@/hooks";
 import React, { type FC } from "react";
 import { Button } from "..";
-import { renderBannerStyles } from "@/utils";
 
 type BannerProps = {
   title: string;
@@ -15,17 +14,24 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
     state: { times },
   } = useAppTheme();
 
-  const _styles = renderBannerStyles(times);
-
   return (
     <section
       about="banner-section"
       className={`
-       ${_styles?.bg}
-       bg-gradient-to-b flex flex-col h-[95vh] justify-center items-center`}
+      ${
+        times.isNight
+          ? "from-foreground-900 to-[#06283D]"
+          : times.isMorning
+          ? "from-[#caddff]"
+          : "from-[#F3F3F3]"
+      } bg-gradient-to-b  flex flex-col h-[95vh] justify-center items-center max-sm:px-[3%]`}
     >
       <h1
-        className={`text-[7rem] text-center max-lg:text-[5rem] max-md-[5rem] max-sm:[2rem] font-semibold bg-gradient-to-r ${_styles?.headerColor} inline-block text-transparent bg-clip-text`}
+        className={`${
+          times.isNight
+            ? "from-slate-500 to-slate-300 to-90%"
+            : "from-green-500 to-[#1B9C85]"
+        } text-[7rem] text-center max-lg:text-[5rem] max-md-[5rem] max-sm:[2rem] font-semibold bg-gradient-to-r inline-block text-transparent bg-clip-text`}
       >
         {title}
       </h1>

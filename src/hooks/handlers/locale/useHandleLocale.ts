@@ -1,8 +1,8 @@
 import type { Locale } from "@/types";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useHandleLocale = () => {
-  const [currentLocale, setCurrentLocale] = useState<Locale | null>(null);
+  const [currentLocale, setCurrentLocale] = useState<Locale>("en");
 
   useEffect(() => {
     try {
@@ -12,24 +12,22 @@ const useHandleLocale = () => {
         | undefined;
 
       if (locale) {
+        window.localStorage.setItem("locale", locale);
         return setCurrentLocale(locale);
       }
 
-      return setCurrentLocale("en");
+      window.localStorage.setItem("locale", currentLocale);
     } catch {
       window.localStorage.removeItem("locale");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (currentLocale) {
-      window.localStorage.setItem("locale", currentLocale);
-    }
-  }, [currentLocale]);
+  const onLocaleChange = () => {
+    window.localStorage.setItem("locale", currentLocale === "en" ? "th" : "en");
 
-  const onLocaleChange = useCallback(() => {
     setCurrentLocale((prev) => (prev === "en" ? "th" : "en"));
-  }, []);
+  };
 
   return { state: { locale: currentLocale }, action: { onLocaleChange } };
 };

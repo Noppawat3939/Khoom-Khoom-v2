@@ -1,7 +1,15 @@
 import React, { type FC, type PropsWithChildren } from "react";
 
-const Container: FC<PropsWithChildren> = ({ children }) => {
-  return <main about="container">{children}</main>;
+type ContainerProps = {
+  className?: string;
+} & PropsWithChildren;
+
+const Container: FC<ContainerProps> = ({ children, className }) => {
+  return (
+    <main about="container" className={className}>
+      {children}
+    </main>
+  );
 };
 
 export default Container;

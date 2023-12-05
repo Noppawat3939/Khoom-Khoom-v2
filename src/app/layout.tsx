@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Kanit } from "next/font/google";
 import "./globals.css";
-import { AppProvider } from "@/app/provider";
+import { AppProvider } from "@/provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const kanit = Kanit({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
-  title: "Khoom Khoom",
-  description: "Find the best price",
+  title: "Khoom Khoomm | Find the best product price for you.",
+  description: "Compare the value of the products.",
 };
 
 export default function RootLayout({
@@ -17,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={kanit.className}>
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

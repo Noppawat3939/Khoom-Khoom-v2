@@ -1,15 +1,14 @@
 "use client";
 
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { MainContainer } from "@/container";
+import { LazyLoad } from "@/components";
 
 const Main = () => {
   return (
-    <div>
-      <Button color="danger" variant="shadow">
-        click me
-      </Button>
-    </div>
+    <LazyLoad>
+      <MainContainer />
+    </LazyLoad>
   );
 };
 

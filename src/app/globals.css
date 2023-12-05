@@ -2,17 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-main: "#F5F5F5";
-}
-
 * {
   margin: unset;
   padding: unset;
   box-sizing: border-box;
-}
-
-body {
-  height: 100vh;
-  background-color: var(--background-main);
 }

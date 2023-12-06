@@ -1,8 +1,13 @@
-import { Banner, Container } from "@/components";
-import { useAppTheme, useGetContentByLocale, useHandleLocale } from "@/hooks";
+import { Banner, Container, CreateProductForm, Drawer } from "@/components";
+import {
+  useAppTheme,
+  useFormModal,
+  useGetContentByLocale,
+  useHandleLocale,
+} from "@/hooks";
 import { _string, renderSnowProperties } from "@/utils";
 import { Button } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 import Snowfall from "react-snowfall";
 
 const MainContainer = () => {
@@ -16,6 +21,9 @@ const MainContainer = () => {
   } = useHandleLocale();
 
   const { data: content } = useGetContentByLocale(locale!);
+  const [values, setValues] = useState(0);
+
+  const { state, action } = useFormModal();
 
   const snowProps = renderSnowProperties(times);
 
@@ -24,7 +32,10 @@ const MainContainer = () => {
       <Banner
         title={_string(content?.main.title_banner)}
         description={_string(content?.main.description_banner)}
-        textBtn={_string(content?.main.start_btn_banner)}
+        textBtn={`${_string(content?.main.start_btn_banner)} ${
+          values !== 0 ? `(${values})` : ""
+        }`}
+        onClick={() => action.handleOpenModal("create-form")}
       />
       <span className="absolute right-3 top-1">
         <Button
@@ -44,6 +55,11 @@ const MainContainer = () => {
           snowflakeCount={snowProps.snowflakeCount}
         />
       )}
+      <CreateProductForm
+        setValues={setValues}
+        open={state.openForm}
+        onClose={action.handleCloseModal}
+      />
     </Container>
   );
 };

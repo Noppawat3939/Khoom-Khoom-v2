@@ -3,5 +3,18 @@
         "title_banner": "คุ้ม คุ้ม",
         "description_banner": "มาค้นหาราคาสินค้าที่ดีที่สุด สำหรับคุณกันเถอะ",
         "start_btn_banner": "เริ่มสร้างรายการ"
+    },
+    "create_product": {
+        "title": "รายละเอียดสินค้า",
+        "product_name_label": "ชื่อสินค้า",
+        "product_name_placeholder": "ช็อคโกแลต, คิทแคท",
+        "product_size_label": "ขนาดสินค้า",
+        "product_size_placeholder": "100",
+        "product_quantity_label": "ปริมาณ (ไม่จำเป็น)",
+        "product_quantity_placeholder": "1",
+        "product_price_label": "ราคาสินค้า",
+        "product_price_placeholder": "45",
+        "create_product_btn": "สร้างรายการสินค้า",
+        "cancel_product_btn": "ยกเลิกรายการ"
     }
 }

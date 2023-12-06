@@ -1,22 +1,26 @@
+import { useLocaleStore } from "@/stores";
 import type { Locale } from "@/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const useHandleLocale = () => {
-  const [currentLocale, setCurrentLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLocaleStore();
 
   useEffect(() => {
     try {
-      const locale = window.localStorage.getItem("locale") as
+      const _locale = window.localStorage.getItem("locale") as
         | Locale
         | null
         | undefined;
 
-      if (locale) {
+      if (_locale) {
         window.localStorage.setItem("locale", locale);
-        return setCurrentLocale(locale);
+
+        setLocale(locale);
+
+        return;
       }
 
-      window.localStorage.setItem("locale", currentLocale);
+      window.localStorage.setItem("locale", locale);
     } catch {
       window.localStorage.removeItem("locale");
     }
@@ -24,12 +28,14 @@ const useHandleLocale = () => {
   }, []);
 
   const onLocaleChange = () => {
-    window.localStorage.setItem("locale", currentLocale === "en" ? "th" : "en");
+    window.localStorage.setItem("locale", locale === "en" ? "th" : "en");
 
-    setCurrentLocale((prev) => (prev === "en" ? "th" : "en"));
+    const newLocale = locale === "en" ? "th" : "en";
+
+    setLocale(newLocale);
   };
 
-  return { state: { locale: currentLocale }, action: { onLocaleChange } };
+  return { state: { locale }, action: { onLocaleChange } };
 };
 
 export default useHandleLocale;

@@ -2,7 +2,9 @@
     "main": {
         "title_banner": "Khoom Khooom",
         "description_banner": "Find the best product price for you.",
-        "start_btn_banner": "Get started"
+        "description_compare_banner": "Why not compare your products?",
+        "start_btn_banner": "Get started",
+        "compare_btn": "Compare"
     },
     "create_product": {
         "title": "Create product detail",

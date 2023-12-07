@@ -1,1 +1,1 @@
-export type CreateProduct = "productName" | "price" | "size";
+export type CreateProduct = "productName" | "price" | "size" | "quantity";

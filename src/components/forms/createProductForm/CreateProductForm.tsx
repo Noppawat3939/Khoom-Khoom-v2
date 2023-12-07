@@ -3,8 +3,9 @@ import { CreateProduct, FormModal } from "@/types";
 import { Button, Input } from "@nextui-org/react";
 import React, { type FC } from "react";
 import { useCreateProduct, useGetContentByLocale } from "@/hooks";
-import { isEmpty } from "lodash";
+import { eq, isEmpty } from "lodash";
 import { useLocaleStore } from "@/stores";
+import { ACTIVE_MODAL } from "@/constants";
 
 type CreateProductFormProps = {
   open?: FormModal | null;
@@ -48,7 +49,7 @@ const CreateProductForm: FC<CreateProductFormProps> = ({
 
   return (
     <Drawer
-      open={open === "create-form"}
+      open={eq(open, ACTIVE_MODAL.CREATE_PRODUCT)}
       onOpenChange={(_open) => {
         if (!_open) {
           const valuesLen = Object.values(state.createProductValues).filter(

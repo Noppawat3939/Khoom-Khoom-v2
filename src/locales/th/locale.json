@@ -2,7 +2,9 @@
     "main": {
         "title_banner": "คุ้ม คุ้ม",
         "description_banner": "มาค้นหาราคาสินค้าที่ดีที่สุด สำหรับคุณกันเถอะ",
-        "start_btn_banner": "เริ่มสร้างรายการ"
+        "description_compare_banner": "ลองเปรียบเทียบสินค้าของคุณดูไหม ?",
+        "start_btn_banner": "เริ่มสร้างรายการ",
+        "compare_btn": "เปรียบเทียบสินค้าทั้งหมด"
     },
     "create_product": {
         "title": "รายละเอียดสินค้า",

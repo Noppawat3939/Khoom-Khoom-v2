@@ -1,6 +1,11 @@
 export type Locale = "en" | "th";
 
-type MainContent = "title_banner" | "description_banner" | "start_btn_banner";
+type MainContent =
+  | "title_banner"
+  | "description_banner"
+  | "start_btn_banner"
+  | "description_compare_banner"
+  | "compare_btn";
 
 type CreateProductContent =
   | "title"

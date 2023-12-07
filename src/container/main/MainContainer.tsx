@@ -1,10 +1,11 @@
-import { Banner, Container, CreateProductForm, Drawer } from "@/components";
+import { Banner, Container, CreateProductForm } from "@/components";
 import {
   useAppTheme,
-  useFormModal,
   useGetContentByLocale,
+  useHandleFormModal,
   useHandleLocale,
 } from "@/hooks";
+import { useProductsStore } from "@/stores";
 import { _string, renderSnowProperties } from "@/utils";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
@@ -16,27 +17,48 @@ const MainContainer = () => {
   } = useAppTheme();
 
   const {
+    action: { handleOpenCreateProduct, handleCloseModal },
+    state: { openModal },
+  } = useHandleFormModal();
+
+  const {
     state: { locale },
     action: { onLocaleChange },
   } = useHandleLocale();
 
-  const { data: content } = useGetContentByLocale(locale!);
-  const [values, setValues] = useState(0);
+  const { data: content, isFetched } = useGetContentByLocale(locale!);
 
-  const { state, action } = useFormModal();
+  const { products } = useProductsStore((store) => ({
+    products: store.products,
+  }));
+
+  const [values, setValues] = useState(0);
 
   const snowProps = renderSnowProperties(times);
 
+  const canCompare = products.length >= 2;
+
   return (
     <Container className="relative">
-      <Banner
-        title={_string(content?.main.title_banner)}
-        description={_string(content?.main.description_banner)}
-        textBtn={`${_string(content?.main.start_btn_banner)} ${
-          values !== 0 ? `(${values})` : ""
-        }`}
-        onClick={() => action.handleOpenModal("create-form")}
-      />
+      {isFetched && (
+        <Banner
+          title={_string(content?.main.title_banner)}
+          description={
+            canCompare
+              ? _string(content?.main.description_compare_banner)
+              : _string(content?.main.description_banner)
+          }
+          textBtn={
+            canCompare
+              ? _string(content?.main.compare_btn)
+              : `${_string(content?.main.start_btn_banner)} ${
+                  values !== 0 ? `(${values})` : ""
+                }`
+          }
+          onClick={handleOpenCreateProduct}
+        />
+      )}
+
       <span className="absolute right-3 top-1">
         <Button
           isIconOnly
@@ -57,8 +79,8 @@ const MainContainer = () => {
       )}
       <CreateProductForm
         setValues={setValues}
-        open={state.openForm}
-        onClose={action.handleCloseModal}
+        open={openModal}
+        onClose={handleCloseModal}
       />
     </Container>
   );

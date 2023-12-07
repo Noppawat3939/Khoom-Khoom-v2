@@ -1,6 +1,13 @@
+import { useProductsStore } from "@/stores";
 import { CreateProduct } from "@/types";
 import { identity } from "lodash";
-import { type ChangeEvent, useCallback, useState, type FormEvent } from "react";
+import {
+  type ChangeEvent,
+  useCallback,
+  useState,
+  type FormEvent,
+  useId,
+} from "react";
 
 type CreateProductValues = Record<CreateProduct, string>;
 
@@ -11,6 +18,13 @@ const useCreateProduct = () => {
     quantity: "",
     price: "",
   };
+
+  const _id = useId();
+
+  const { products, addedProduct } = useProductsStore((store) => ({
+    products: store.products,
+    addedProduct: store.addedProduct,
+  }));
 
   const [createProductValues, setCreateProductValues] =
     useState<CreateProductValues>(createProductForm);
@@ -24,19 +38,20 @@ const useCreateProduct = () => {
     []
   );
 
-  const onSubmitCreateProductForm = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      console.log("submit", createProductValues);
-    },
-    []
-  );
-
   const onResetCreateProductValues = useCallback(
     () => setCreateProductValues(createProductForm),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
+
+  const onSubmitCreateProductForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const newProduct = { ...createProductValues, id: _id };
+
+    addedProduct([...products, newProduct]);
+    setTimeout(onResetCreateProductValues, 1000);
+  };
 
   const isDisabledSubmit = [
     !createProductValues.productName.trim(),

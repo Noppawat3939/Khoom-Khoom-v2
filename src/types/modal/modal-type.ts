@@ -1,1 +1,1 @@
-export type FormModal = "create-form";
+export type FormModal = "create-product-modal";

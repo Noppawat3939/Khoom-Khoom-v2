@@ -37,7 +37,10 @@ const useHandleLocale = () => {
     });
   };
 
-  return { state: { locale }, action: { onLocaleChange } };
+  return {
+    state: { locale, localeLabel: locale.toUpperCase() },
+    action: { onLocaleChange },
+  };
 };
 
 export default useHandleLocale;

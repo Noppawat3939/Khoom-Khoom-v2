@@ -1,74 +1,32 @@
-import { Banner, Container, CreateProductForm } from "@/components";
-import {
-  useAppTheme,
-  useGetContentByLocale,
-  useHandleFormModal,
-  useHandleLocale,
-} from "@/hooks";
-import { useProductsStore } from "@/stores";
-import { _string, renderSnowProperties } from "@/utils";
+import { Banner, Container, CreateProductForm, SnowBall } from "@/components";
+import { useAppTheme, useHandleBanner, useHandleLocale } from "@/hooks";
+import { _string } from "@/utils";
 import { Button } from "@nextui-org/react";
-import React, { useState } from "react";
-import Snowfall from "react-snowfall";
+import React from "react";
 
 const MainContainer = () => {
   const {
-    state: { shouldShowSnowBall, times },
+    state: { times },
   } = useAppTheme();
 
   const {
-    action: { handleOpenCreateProduct, handleCloseModal },
-    state: { openModal },
-  } = useHandleFormModal();
-
-  const {
-    state: { locale },
+    state: { locale, localeLabel },
     action: { onLocaleChange },
   } = useHandleLocale();
 
-  const { data: content, isFetched } = useGetContentByLocale(locale!);
-
-  const { products } = useProductsStore((store) => ({
-    products: store.products,
-  }));
-
-  const [values, setValues] = useState(0);
-
-  const snowProps = renderSnowProperties(times);
-
-  const canCompare = products.length >= 2;
-
-  const renderButtonProps = () => {
-    if (canCompare)
-      return { text: _string(content?.main.compare_btn), onClick: () => null };
-    if (products.length === 1)
-      return {
-        text: _string(content?.main.add_more_btn),
-        onClick: handleOpenCreateProduct,
-      };
-
-    return {
-      text: `${_string(content?.main.start_btn_banner)} ${
-        values !== 0 ? `(${values})` : ""
-      }`,
-      onClick: handleOpenCreateProduct,
-    };
-  };
-
-  const btnProps = renderButtonProps();
+  const {
+    state: { bannerProps, openModal, isFetched },
+    action: { handleSetValue, handleCloseModal },
+  } = useHandleBanner(locale);
 
   return (
     <Container className="relative">
       {isFetched && (
         <Banner
-          title={_string(content?.main.title_banner)}
-          description={
-            canCompare
-              ? _string(content?.main.description_compare_banner)
-              : _string(content?.main.description_banner)
-          }
-          textBtn={btnProps.text}
-          onClick={btnProps.onClick}
+          title={bannerProps.title}
+          description={bannerProps.description}
+          textBtn={bannerProps.textBtn}
+          onClick={bannerProps.onClick}
         />
       )}
 
@@ -81,17 +39,14 @@ const MainContainer = () => {
             times.isNight ? "text-white" : "text-slate-400"
           } text-md`}
         >
-          {locale.toUpperCase()}
+          {localeLabel}
         </Button>
       </span>
-      {shouldShowSnowBall && (
-        <Snowfall
-          color={snowProps.color}
-          snowflakeCount={snowProps.snowflakeCount}
-        />
-      )}
+
+      <SnowBall />
+
       <CreateProductForm
-        setValues={setValues}
+        setValues={handleSetValue}
         open={openModal}
         onClose={handleCloseModal}
       />

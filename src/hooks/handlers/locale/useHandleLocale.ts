@@ -1,38 +1,40 @@
 import { useLocaleStore } from "@/stores";
 import type { Locale } from "@/types";
-import { useEffect } from "react";
+import { useEffect, useTransition } from "react";
 
 const useHandleLocale = () => {
   const { locale, setLocale } = useLocaleStore();
+  const [, startTransition] = useTransition();
 
   useEffect(() => {
     try {
-      const _locale = window.localStorage.getItem("locale") as
-        | Locale
-        | null
-        | undefined;
+      const currentLang = () =>
+        window.localStorage.getItem("locale") as Locale | null | undefined;
 
-      if (_locale) {
-        window.localStorage.setItem("locale", locale);
-
-        setLocale(locale);
-
-        return;
+      if (currentLang() === "en") {
+        setLocale("en");
       }
 
-      window.localStorage.setItem("locale", locale);
+      if (currentLang() === "th") {
+        setLocale("th");
+      }
+
+      // window.localStorage.setItem("locale", locale);
     } catch {
       window.localStorage.removeItem("locale");
+      setLocale("en");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onLocaleChange = () => {
-    window.localStorage.setItem("locale", locale === "en" ? "th" : "en");
-
     const newLocale = locale === "en" ? "th" : "en";
 
     setLocale(newLocale);
+
+    startTransition(() => {
+      window.localStorage.setItem("locale", locale === "en" ? "th" : "en");
+    });
   };
 
   return { state: { locale }, action: { onLocaleChange } };

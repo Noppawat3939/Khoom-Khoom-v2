@@ -7,6 +7,6 @@ type UseLocaleStore = {
 };
 
 export const useLocaleStore = create<UseLocaleStore>((set) => ({
-  locale: (window.localStorage.getItem("locale") as Locale) ?? "en",
+  locale: "en",
   setLocale: (locale) => set(() => ({ locale })),
 }));

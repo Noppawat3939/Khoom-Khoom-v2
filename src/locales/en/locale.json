@@ -4,6 +4,7 @@
         "description_banner": "Find the best product price for you.",
         "description_compare_banner": "Why not compare your products?",
         "start_btn_banner": "Get started",
+        "add_more_btn": "Add 1 more to compare.",
         "compare_btn": "Compare"
     },
     "create_product": {

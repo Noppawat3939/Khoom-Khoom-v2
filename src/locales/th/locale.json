@@ -4,6 +4,7 @@
         "description_banner": "มาค้นหาราคาสินค้าที่ดีที่สุด สำหรับคุณกันเถอะ",
         "description_compare_banner": "ลองเปรียบเทียบสินค้าของคุณดูไหม ?",
         "start_btn_banner": "เริ่มสร้างรายการ",
+        "add_more_btn": "เพิ่มอีก 1 รายการสิ",
         "compare_btn": "เปรียบเทียบสินค้าทั้งหมด"
     },
     "create_product": {

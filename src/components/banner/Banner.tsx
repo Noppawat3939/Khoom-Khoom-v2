@@ -68,6 +68,7 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
         </Button>
       ) : (
         <Button
+          onClick={onClick}
           className={`mt-5 text-lg ${
             times.isNight ? "text-foreground-700" : "text-gray-400"
           }`}

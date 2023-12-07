@@ -38,6 +38,25 @@ const MainContainer = () => {
 
   const canCompare = products.length >= 2;
 
+  const renderButtonProps = () => {
+    if (canCompare)
+      return { text: _string(content?.main.compare_btn), onClick: () => null };
+    if (products.length === 1)
+      return {
+        text: _string(content?.main.add_more_btn),
+        onClick: handleOpenCreateProduct,
+      };
+
+    return {
+      text: `${_string(content?.main.start_btn_banner)} ${
+        values !== 0 ? `(${values})` : ""
+      }`,
+      onClick: handleOpenCreateProduct,
+    };
+  };
+
+  const btnProps = renderButtonProps();
+
   return (
     <Container className="relative">
       {isFetched && (
@@ -48,14 +67,8 @@ const MainContainer = () => {
               ? _string(content?.main.description_compare_banner)
               : _string(content?.main.description_banner)
           }
-          textBtn={
-            canCompare
-              ? _string(content?.main.compare_btn)
-              : `${_string(content?.main.start_btn_banner)} ${
-                  values !== 0 ? `(${values})` : ""
-                }`
-          }
-          onClick={handleOpenCreateProduct}
+          textBtn={btnProps.text}
+          onClick={btnProps.onClick}
         />
       )}
 

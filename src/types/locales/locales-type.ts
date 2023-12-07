@@ -5,7 +5,8 @@ type MainContent =
   | "description_banner"
   | "start_btn_banner"
   | "description_compare_banner"
-  | "compare_btn";
+  | "compare_btn"
+  | "add_more_btn";
 
 type CreateProductContent =
   | "title"

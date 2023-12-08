@@ -20,5 +20,7 @@ export const useProductsStore = create<UseProductsStore>((set, get) => ({
         : [],
     })),
   clearProducts: () => set(() => ({ products: [] })),
-  canCompareProducts: get().products.length >= 2,
+  canCompareProducts: get()?.products?.length
+    ? get().products.length >= 2
+    : false,
 }));

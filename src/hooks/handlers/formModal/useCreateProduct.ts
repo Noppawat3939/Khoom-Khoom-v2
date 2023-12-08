@@ -50,7 +50,7 @@ const useCreateProduct = () => {
     const newProduct = { ...createProductValues, id: _id };
 
     addedProduct([...products, newProduct]);
-    setTimeout(onResetCreateProductValues, 1000);
+    setTimeout(onResetCreateProductValues, 300);
   };
 
   const isDisabledSubmit = [

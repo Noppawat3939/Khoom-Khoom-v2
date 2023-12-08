@@ -2,9 +2,8 @@ import { Drawer } from "@/components";
 import { CreateProduct, FormModal } from "@/types";
 import { Button, Input } from "@nextui-org/react";
 import React, { type FC } from "react";
-import { useCreateProduct, useGetContentByLocale } from "@/hooks";
+import { useCreateProduct, useRenderContentCreateProduct } from "@/hooks";
 import { eq, isEmpty } from "lodash";
-import { useLocaleStore } from "@/stores";
 import { ACTIVE_MODAL } from "@/constants";
 
 type CreateProductFormProps = {
@@ -20,27 +19,9 @@ const CreateProductForm: FC<CreateProductFormProps> = ({
 }) => {
   const { state, action } = useCreateProduct();
 
-  const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
-  const { data: content } = useGetContentByLocale(locale);
-
-  const createProductInputProps = {
-    productName: {
-      placeholder: content?.create_product.product_name_placeholder,
-      label: content?.create_product.product_name_label,
-    },
-    quantity: {
-      label: content?.create_product.product_quantity_label,
-      placeholder: content?.create_product.product_quantity_placeholder,
-    },
-    size: {
-      placeholder: content?.create_product.product_size_placeholder,
-      label: content?.create_product.product_size_label,
-    },
-    price: {
-      placeholder: content?.create_product.product_price_placeholder,
-      label: content?.create_product.product_price_label,
-    },
-  };
+  const {
+    state: { createProductContent },
+  } = useRenderContentCreateProduct();
 
   const onCancelForm = () => {
     onClose();
@@ -68,17 +49,19 @@ const CreateProductForm: FC<CreateProductFormProps> = ({
         >
           <div>
             <h1 className="text-3xl text-foreground-600 font-semibold text-center">
-              {content?.create_product.title}
+              {createProductContent.content?.create_product.title}
             </h1>
             <div className="mt-[5%] flex flex-col gap-5">
               {Object.keys(state.createProductForm).map((key) => (
                 <Input
                   aria-label={`${key}-input-value`}
                   variant="flat"
-                  label={createProductInputProps[key as CreateProduct].label}
+                  label={
+                    createProductContent.inputProps[key as CreateProduct].label
+                  }
                   placeholder={
-                    createProductInputProps[key as CreateProduct].placeholder ??
-                    undefined
+                    createProductContent.inputProps[key as CreateProduct]
+                      .placeholder ?? undefined
                   }
                   key={key}
                   value={state.createProductValues[key as CreateProduct]}
@@ -92,10 +75,10 @@ const CreateProductForm: FC<CreateProductFormProps> = ({
           </div>
           <footer about="form-footer" className="flex justify-center space-x-3">
             <Button type="submit" size="lg" isDisabled={state.isDisabledSubmit}>
-              {content?.create_product.create_product_btn}
+              {createProductContent.content?.create_product.create_product_btn}
             </Button>
             <Button size="lg" variant="ghost" onClick={onCancelForm}>
-              {content?.create_product.cancel_product_btn}
+              {createProductContent.content?.create_product.cancel_product_btn}
             </Button>
           </footer>
         </form>

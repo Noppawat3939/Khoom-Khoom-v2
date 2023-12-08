@@ -1,14 +1,21 @@
-import { useGetContentByLocale, useHandleFormModal } from "@/hooks";
+import {
+  useGetContentByLocale,
+  useHandleFormModal,
+  useMutateCompareProduct,
+} from "@/hooks";
 import { useProductsStore } from "@/stores";
 import { Locale } from "@/types";
 import { _string } from "@/utils";
 import { useCallback, useState } from "react";
 
 const useHandleBanner = (locale: Locale) => {
-  const { products, canCompare } = useProductsStore((store) => ({
+  const { products } = useProductsStore((store) => ({
     products: store.products,
-    canCompare: store.canCompareProducts,
   }));
+
+  const { mutateAsync } = useMutateCompareProduct();
+
+  const canCompare = products.length ? products.length >= 2 : false;
 
   const {
     action: { handleOpenCreateProduct, handleCloseModal },
@@ -26,7 +33,7 @@ const useHandleBanner = (locale: Locale) => {
         title,
         textBtn: _string(content?.main.compare_btn),
         description: _string(content?.main.description_compare_banner),
-        onClick: () => null,
+        onClick: () => mutateAsync(products),
       };
     if (products.length === 1)
       return {

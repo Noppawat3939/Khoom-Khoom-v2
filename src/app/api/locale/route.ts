@@ -13,7 +13,7 @@ export const GET = () => {
 
   if (!LOCALES.includes(lang))
     return NextResponse.json(
-      { error: true, message: "header is required" },
+      { error: true, message: "Header is required" },
       { status: HttpStatusCode.BadRequest }
     );
 

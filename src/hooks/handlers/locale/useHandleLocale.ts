@@ -18,8 +18,6 @@ const useHandleLocale = () => {
       if (currentLang() === "th") {
         setLocale("th");
       }
-
-      // window.localStorage.setItem("locale", locale);
     } catch {
       window.localStorage.removeItem("locale");
       setLocale("en");

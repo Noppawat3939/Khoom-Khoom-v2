@@ -1,13 +1,8 @@
 import { useProductsStore } from "@/stores";
 import { CreateProduct } from "@/types";
 import { identity } from "lodash";
-import {
-  type ChangeEvent,
-  useCallback,
-  useState,
-  type FormEvent,
-  useId,
-} from "react";
+import { type ChangeEvent, useCallback, useState, type FormEvent } from "react";
+import { v4 as uuid } from "uuid";
 
 type CreateProductValues = Record<CreateProduct, string>;
 
@@ -18,8 +13,6 @@ const useCreateProduct = () => {
     quantity: "",
     price: "",
   };
-
-  const _id = useId();
 
   const { products, addedProduct } = useProductsStore((store) => ({
     products: store.products,
@@ -47,7 +40,7 @@ const useCreateProduct = () => {
   const onSubmitCreateProductForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const newProduct = { ...createProductValues, id: _id };
+    const newProduct = { ...createProductValues, id: uuid() };
 
     addedProduct([...products, newProduct]);
     setTimeout(onResetCreateProductValues, 300);

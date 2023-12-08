@@ -7,10 +7,9 @@ type UseProductsStore = {
   addedProduct: (newProduct: Product[]) => void;
   removedProduct: (id: string) => void;
   clearProducts: () => void;
-  canCompareProducts: Boolean;
 };
 
-export const useProductsStore = create<UseProductsStore>((set, get) => ({
+export const useProductsStore = create<UseProductsStore>((set) => ({
   products: [],
   addedProduct: (product) => set(() => ({ products: product })),
   removedProduct: (removedId) =>
@@ -20,7 +19,4 @@ export const useProductsStore = create<UseProductsStore>((set, get) => ({
         : [],
     })),
   clearProducts: () => set(() => ({ products: [] })),
-  canCompareProducts: get()?.products?.length
-    ? get().products.length >= 2
-    : false,
 }));

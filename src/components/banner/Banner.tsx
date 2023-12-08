@@ -1,9 +1,8 @@
 import { useAppTheme } from "@/hooks";
-import React, { useMemo, type FC, useCallback } from "react";
-import { Button } from "..";
+import React, { type FC } from "react";
+import { Button, CardProduct } from "..";
 import { useProductsStore } from "@/stores";
 import { isEmpty } from "lodash";
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 
 type BannerProps = {
   title: string;
@@ -21,7 +20,7 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
     products: store.products,
   }));
 
-  const renderProductImage = () => {
+  const renderProductImage = (): string => {
     if (times.isMorning)
       return "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
     if (times.isAfternoon)
@@ -83,29 +82,11 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
       <section className="gap-6 max-md:gap-4 min-w-[80%] max-md:overflow-y-auto max-md:max-h-[50%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1">
         {!isEmpty(products) &&
           products.map((product) => (
-            <Card shadow="sm" className="p-2 min-h-[200px]" key={product.id}>
-              <CardBody className="overflow-visible p-0">
-                <Image
-                  shadow="sm"
-                  radius="sm"
-                  width="100%"
-                  alt="default-product-image"
-                  loading="lazy"
-                  className="w-full object-cover h-[140px] max-md:h-[110px]"
-                  src={renderProductImage()}
-                />
-                <CardHeader className="p-0 text-2xl flex items-baseline max-md:text-xl">
-                  {product.productName}
-                  <span className="text-foreground-400 text-lg max-sm:text-sm ml-1">{`(size ${product.size})`}</span>
-                </CardHeader>
-                <span className="flex items-baseline mt-auto space-x-1">
-                  <h2 aria-label="price-label" className="text-lg font-medium">
-                    Price
-                  </h2>
-                  <h2 className="text-md font-medium text-foreground-700">{`${product.price} Baht`}</h2>
-                </span>
-              </CardBody>
-            </Card>
+            <CardProduct
+              {...product}
+              image={renderProductImage()}
+              key={product.id}
+            />
           ))}
       </section>
     </section>

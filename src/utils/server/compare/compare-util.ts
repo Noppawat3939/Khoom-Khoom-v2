@@ -23,7 +23,6 @@ export const mapPricePerAmount = (products: Product[]) => {
 
     if (!isNaN(priceNum) && !isNaN(amountNum) && amountNum !== 0) {
       return {
-        // amountPerPrice: Number((amountNum / priceNum).toFixed(3)),
         pricePerAmount: Number((priceNum / amountNum).toFixed(3)),
         id: product.id,
       };

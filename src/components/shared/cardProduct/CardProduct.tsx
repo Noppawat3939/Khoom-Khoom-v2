@@ -11,14 +11,7 @@ const CardProduct: FC<CardProductProps> = ({
   size,
 }) => {
   return (
-    <Card
-      shadow="sm"
-      className="p-2 min-h-[200px]"
-      isPressable
-      onDoubleClick={() => {
-        console.log("double click_");
-      }}
-    >
+    <Card shadow="sm" className="p-2 min-h-[200px]" isPressable>
       <CardBody className="overflow-visible p-0">
         <Image
           shadow="sm"
@@ -31,13 +24,19 @@ const CardProduct: FC<CardProductProps> = ({
         />
         <CardHeader className="p-0 text-2xl flex items-baseline max-md:text-xl">
           {productName}
-          <span className="text-foreground-400 text-lg max-sm:text-sm ml-1">{`(size ${size})`}</span>
+          <span
+            aria-label="size-product"
+            className="text-foreground-400 text-lg max-sm:text-sm ml-1"
+          >{`(size ${size})`}</span>
         </CardHeader>
         <span className="flex items-baseline mt-auto space-x-1">
           <h2 aria-label="price-label" className="text-lg font-medium">
             Price
           </h2>
-          <h2 className="text-md font-medium text-foreground-700">{`${price} Baht`}</h2>
+          <h2
+            aria-label="price-product"
+            className="text-md font-medium text-foreground-700"
+          >{`${price} Baht`}</h2>
         </span>
       </CardBody>
     </Card>

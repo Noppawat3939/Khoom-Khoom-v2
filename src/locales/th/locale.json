@@ -19,5 +19,14 @@
         "product_price_placeholder": "45",
         "create_product_btn": "สร้างรายการสินค้า",
         "cancel_product_btn": "ยกเลิกรายการ"
+    },
+    "compare_product": {
+        "cheapest_one_product_title": "มีราคาถูก และ ค้มค่า มากที่สุดสำหรับคุณ",
+        "equal_products_title": "มีราคาเท่ากันทั้งหมด (เลือกอะไรก็ได้)",
+        "close_btn": "ปิด"
+    },
+    "failed_modal": {
+        "title": "ขออภัย มีบางอย่างผิดพลาด",
+        "description": "ช่วยลองใหม่อีกครั้งนะ"
     }
 }

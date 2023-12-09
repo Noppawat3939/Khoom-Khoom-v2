@@ -19,5 +19,14 @@
         "product_price_placeholder": "45",
         "create_product_btn": "Create product",
         "cancel_product_btn": "Cancel"
+    },
+    "compare_product": {
+        "cheapest_one_product_title": "has the cheapest price",
+        "equal_products_title": "have the same price.",
+        "close_btn": "Close"
+    },
+    "failed_modal": {
+        "title": "Sorry, something went wrong.",
+        "description": "please retry again"
     }
 }

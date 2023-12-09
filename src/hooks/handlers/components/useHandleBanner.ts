@@ -1,3 +1,5 @@
+"use client";
+
 import {
   useGetContentByLocale,
   useHandleFormModal,
@@ -6,7 +8,6 @@ import {
 import { useProductsStore } from "@/stores";
 import type { Locale } from "@/types";
 import { _string } from "@/utils";
-import { type AxiosError } from "axios";
 import { useCallback, useState } from "react";
 
 const useHandleBanner = (locale: Locale) => {
@@ -14,12 +15,20 @@ const useHandleBanner = (locale: Locale) => {
     products: store.products,
   }));
 
+  const {
+    action: { handleOpenCompareProduct, handleSetCompareProducts },
+  } = useHandleFormModal();
+
   const { mutateAsync } = useMutateCompareProduct();
 
   const canCompare = products.length ? products.length >= 2 : false;
 
   const {
-    action: { handleOpenCreateProduct, handleCloseModal },
+    action: {
+      handleOpenCreateProduct,
+      handleCloseModal,
+      handleOpenFailedModal,
+    },
     state: { openModal },
   } = useHandleFormModal();
 
@@ -32,24 +41,28 @@ const useHandleBanner = (locale: Locale) => {
     if (canCompare)
       return {
         title,
-        textBtn: _string(content?.main.compare_btn),
+        textBtn: {
+          compare: _string(content?.main.compare_btn),
+          add: _string(content?.main.add_more_btn),
+        },
         description: _string(content?.main.description_compare_banner),
-        onClick: () =>
-          mutateAsync(products)
-            .then(({ data }) => {
-              console.log("success_", data.data);
-            })
-            .catch((err) => {
-              const error = err as AxiosError;
-              console.log("error_", error.response?.data);
-            }),
+        onClick: {
+          add: handleOpenCreateProduct,
+          compare: () =>
+            mutateAsync(products)
+              .then(({ data }) => {
+                handleOpenCompareProduct();
+                handleSetCompareProducts(data);
+              })
+              .catch(() => handleOpenFailedModal()),
+        },
       };
     if (products.length === 1)
       return {
         title,
         textBtn: _string(content?.main.add_more_btn),
         description: _string(content?.main.description_compare_banner),
-        onClick: handleOpenCreateProduct,
+        onClick: { add: handleOpenCreateProduct, compare: () => null },
       };
 
     return {
@@ -58,7 +71,7 @@ const useHandleBanner = (locale: Locale) => {
         values !== 0 ? `(${values})` : ""
       }`,
       description: _string(content?.main.description_banner),
-      onClick: handleOpenCreateProduct,
+      onClick: { add: handleOpenCreateProduct, compare: () => null },
     };
   };
 

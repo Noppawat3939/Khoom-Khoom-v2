@@ -1,3 +1,5 @@
+"use client";
+
 import { useProductsStore } from "@/stores";
 import { CreateProduct } from "@/types";
 import { identity } from "lodash";
@@ -10,8 +12,8 @@ const useCreateProduct = () => {
   const createProductForm = {
     productName: "",
     size: "",
-    quantity: "",
     price: "",
+    quantity: "",
   };
 
   const { products, addedProduct } = useProductsStore((store) => ({

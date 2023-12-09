@@ -21,7 +21,16 @@ type CreateProductContent =
   | "create_product_btn"
   | "cancel_product_btn";
 
+type CompareProductContent =
+  | "cheapest_one_product_title"
+  | "close_btn"
+  | "equal_products_title";
+
+type FailedModalContent = "title" | "description";
+
 export interface ContentByLocale {
   main: Record<MainContent, string>;
   create_product: Record<CreateProductContent, string>;
+  compare_product: Record<CompareProductContent, string>;
+  failed_modal: Record<FailedModalContent, string>;
 }

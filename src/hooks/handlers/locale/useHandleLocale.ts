@@ -1,3 +1,5 @@
+"use client";
+
 import { useLocaleStore } from "@/stores";
 import type { Locale } from "@/types";
 import { useEffect, useTransition } from "react";

@@ -2,13 +2,15 @@ import { useAppTheme } from "@/hooks";
 import React, { type FC } from "react";
 import { Button, CardProduct } from "..";
 import { useProductsStore } from "@/stores";
-import { isEmpty } from "lodash";
+import { isEmpty, isObject, isString } from "lodash";
+
+type ModifyProps<T> = Record<"add" | "compare", T>;
 
 type BannerProps = {
   title: string;
   description: string;
-  textBtn: string;
-  onClick?: <T>(arg?: T) => void;
+  textBtn: string | ModifyProps<string>;
+  onClick: ModifyProps<() => void>;
 };
 
 const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
@@ -54,32 +56,44 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
         {description}
       </p>
 
-      {products.length <= 2 ? (
+      {products.length <= 1 ? (
         <Button
-          onClick={onClick}
+          onClick={onClick.add}
           className={`mt-5 text-lg ${
             times.isNight ? "text-foreground-100" : "text-gray-400"
           }`}
           variant="bordered"
           about="create-product-btn"
         >
-          {textBtn}
+          {isString(textBtn) && textBtn}
         </Button>
       ) : (
-        <Button
-          onClick={onClick}
-          className={`mt-5 text-lg ${
-            times.isNight ? "text-foreground-700" : "text-gray-400"
-          }`}
-          variant="solid"
-          about="create-product-btn"
-        >
-          {textBtn}
-        </Button>
+        <div className="flex space-x-3">
+          <Button
+            onClick={onClick.add}
+            className={`mt-5 text-lg ${
+              times.isNight ? "text-foreground-700" : "text-gray-400"
+            }`}
+            variant="bordered"
+            about="create-product-btn"
+          >
+            {isObject(textBtn) && textBtn.add}
+          </Button>
+          <Button
+            onClick={onClick.compare}
+            className={`mt-5 text-lg ${
+              times.isNight ? "text-foreground-700" : "text-gray-400"
+            }`}
+            variant="solid"
+            about="compare-product-btn"
+          >
+            {isObject(textBtn) && textBtn.compare}
+          </Button>
+        </div>
       )}
 
       <br />
-      <section className="gap-6 max-md:gap-4 min-w-[80%] max-md:overflow-y-auto max-md:max-h-[50%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1">
+      <section className="gap-6 max-md:gap-4 min-w-[80%] max-md:overflow-y-auto max-md:max-h-[50%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
         {!isEmpty(products) &&
           products.map((product) => (
             <CardProduct

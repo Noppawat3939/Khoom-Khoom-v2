@@ -6,7 +6,9 @@ import React from "react";
 
 const MainContainer = () => {
   const {
-    state: { times },
+    state: {
+      times: { isNight },
+    },
   } = useAppTheme();
 
   const {
@@ -35,9 +37,7 @@ const MainContainer = () => {
           isIconOnly
           variant="bordered"
           onClick={onLocaleChange}
-          className={`${
-            times.isNight ? "text-white" : "text-slate-400"
-          } text-md`}
+          className={`${isNight ? "text-white" : "text-slate-400"} text-md`}
         >
           {localeLabel}
         </Button>

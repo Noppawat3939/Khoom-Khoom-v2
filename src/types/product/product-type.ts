@@ -6,3 +6,5 @@ export type MapProductPricePerAmount = {
   id: string;
   pricePerAmount: number;
 }[];
+
+export type CompareProducts = { data: Product[] | null; isEqual: boolean };

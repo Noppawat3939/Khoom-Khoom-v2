@@ -1,6 +1,10 @@
 "use client";
 
-import { CompareProductModal, FailedModal } from "@/components";
+import {
+  CompareProductModal,
+  FailedModal,
+  DeleteProductModal,
+} from "@/components";
 import React, { type FC, type PropsWithChildren } from "react";
 
 type ModalProviderProps = PropsWithChildren;
@@ -11,6 +15,7 @@ const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
       {children}
       <CompareProductModal />
       <FailedModal />
+      <DeleteProductModal />
     </main>
   );
 };

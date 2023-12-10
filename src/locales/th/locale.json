@@ -28,5 +28,14 @@
     "failed_modal": {
         "title": "ขออภัย มีบางอย่างผิดพลาด",
         "description": "ช่วยลองใหม่อีกครั้งนะ"
+    },
+    "delete_product": {
+        "title": "คุณต้องการลบรายการ {{}} ใช่ไหม ?",
+        "delete_btn": "ลบรายการนี้"
+    },
+    "product_details": {
+        "name_label": "ชื่อสินค้า",
+        "price_label": "ราคา {{}} บาท",
+        "size_label": "(ขนาด {{}})"
     }
 }

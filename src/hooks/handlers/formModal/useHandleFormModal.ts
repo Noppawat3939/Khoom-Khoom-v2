@@ -11,6 +11,7 @@ const useHandleFormModal = () => {
     onClose,
     setCompareProducts,
     resetCompareProducts,
+    setParams,
   } = useModalStore();
 
   const handleOpenCreateProduct = useCallback(
@@ -28,6 +29,11 @@ const useHandleFormModal = () => {
     []
   );
 
+  const handleOpenDeleteModal = useCallback((removeId?: string) => {
+    setParams({ removeId });
+    onOpenChange(ACTIVE_MODAL.DELETE_PRODUCT);
+  }, []);
+
   const handleSetCompareProducts = (compareResponse: CompareProducts) =>
     setCompareProducts(compareResponse);
 
@@ -44,6 +50,7 @@ const useHandleFormModal = () => {
       handleSetCompareProducts,
       handleResetCompareProducts,
       handleOpenFailedModal,
+      handleOpenDeleteModal,
     },
     state: { openModal: open },
   };

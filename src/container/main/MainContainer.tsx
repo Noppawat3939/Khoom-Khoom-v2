@@ -18,7 +18,7 @@ const MainContainer = () => {
 
   const {
     state: { bannerProps, openModal, isFetched },
-    action: { handleSetValue, handleCloseModal },
+    action: { handleSetValue, handleCloseModal, handleOpenDeleteModal },
   } = useHandleBanner(locale);
 
   return (
@@ -29,6 +29,7 @@ const MainContainer = () => {
           description={bannerProps.description}
           textBtn={bannerProps.textBtn}
           onClick={bannerProps.onClick}
+          onRemove={handleOpenDeleteModal}
         />
       )}
 

@@ -16,7 +16,11 @@ const useHandleBanner = (locale: Locale) => {
   }));
 
   const {
-    action: { handleOpenCompareProduct, handleSetCompareProducts },
+    action: {
+      handleOpenCompareProduct,
+      handleSetCompareProducts,
+      handleOpenDeleteModal,
+    },
   } = useHandleFormModal();
 
   const { mutateAsync } = useMutateCompareProduct();
@@ -79,7 +83,7 @@ const useHandleBanner = (locale: Locale) => {
 
   return {
     state: { bannerProps: handleBannerProps(), openModal, isFetched },
-    action: { handleSetValue, handleCloseModal },
+    action: { handleSetValue, handleCloseModal, handleOpenDeleteModal },
   };
 };
 

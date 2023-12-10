@@ -11,9 +11,16 @@ type BannerProps = {
   description: string;
   textBtn: string | ModifyProps<string>;
   onClick: ModifyProps<() => void>;
+  onRemove: (removeId?: string) => void;
 };
 
-const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
+const Banner: FC<BannerProps> = ({
+  title,
+  description,
+  textBtn,
+  onClick,
+  onRemove,
+}) => {
   const {
     state: { times },
   } = useAppTheme();
@@ -82,9 +89,10 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
           <Button
             onClick={onClick.compare}
             className={`mt-5 text-lg ${
-              times.isNight ? "text-foreground-700" : "text-gray-400"
+              times.isNight ? "text-foreground-700" : "text-gray-100"
             }`}
-            variant="solid"
+            variant="shadow"
+            color="default"
             about="compare-product-btn"
           >
             {isObject(textBtn) && textBtn.compare}
@@ -100,6 +108,7 @@ const Banner: FC<BannerProps> = ({ title, description, textBtn, onClick }) => {
               {...product}
               image={renderProductImage()}
               key={product.id}
+              onRemove={onRemove}
             />
           ))}
       </section>

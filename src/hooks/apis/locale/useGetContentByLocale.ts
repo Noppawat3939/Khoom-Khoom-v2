@@ -1,4 +1,5 @@
 import { getContent } from "@/services";
+import { useLocaleStore } from "@/stores";
 import type { Locale } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 

@@ -28,5 +28,14 @@
     "failed_modal": {
         "title": "Sorry, something went wrong.",
         "description": "please retry again"
+    },
+    "delete_product": {
+        "title": "Do you want to delete the {{}} ?",
+        "delete_btn": "Delete"
+    },
+    "product_details": {
+        "name_label": "Product name",
+        "price_label": "Price {{}} baht",
+        "size_label": "(size {{}})"
     }
 }

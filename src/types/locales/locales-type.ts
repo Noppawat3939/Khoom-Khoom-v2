@@ -28,9 +28,15 @@ type CompareProductContent =
 
 type FailedModalContent = "title" | "description";
 
+type DeleteProductContent = "title" | "delete_btn";
+
+type ProductDetailsContent = "name_label" | "price_label" | "size_label";
+
 export interface ContentByLocale {
   main: Record<MainContent, string>;
   create_product: Record<CreateProductContent, string>;
   compare_product: Record<CompareProductContent, string>;
   failed_modal: Record<FailedModalContent, string>;
+  delete_product: Record<DeleteProductContent, string>;
+  product_details: Record<ProductDetailsContent, string>;
 }

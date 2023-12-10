@@ -79,7 +79,7 @@ const Banner: FC<BannerProps> = ({
           {isString(textBtn) && textBtn}
         </Button>
       ) : (
-        <div className="flex space-x-3">
+        <div className="flex space-x-3 max-sm:flex-col">
           <Button
             isLoading={isPending}
             onClick={onClick.add}
@@ -107,7 +107,10 @@ const Banner: FC<BannerProps> = ({
       )}
 
       <br />
-      <section className="gap-6 max-md:gap-4 min-w-[80%] max-md:overflow-y-auto max-md:max-h-[50%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
+      <section
+        about="render-product-details"
+        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1"
+      >
         {!isEmpty(products) &&
           products.map((product) => (
             <CardProduct

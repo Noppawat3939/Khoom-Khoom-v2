@@ -1,4 +1,4 @@
-import { ACTIVE_MODAL } from "@/constants";
+import { ACTIVE_MODAL, VARIABLE_CONTENT } from "@/constants";
 import { useGetContentByLocale } from "@/hooks";
 import { useLocaleStore, useModalStore, useProductsStore } from "@/stores";
 import type { FormModal, UpdateProductParam } from "@/types";
@@ -84,7 +84,7 @@ const useRenderContentProductForm = (
       activeCreate
         ? content?.create_product.title
         : content?.update_product.title?.replaceAll(
-            "{{}}",
+            VARIABLE_CONTENT,
             _string(product?.productName)
           )
     ),

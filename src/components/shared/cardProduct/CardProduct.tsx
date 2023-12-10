@@ -1,6 +1,5 @@
-import { useAppTheme, useGetContentByLocale } from "@/hooks";
-import { useLocaleStore } from "@/stores";
-import { Product } from "@/types";
+import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
+import type { Product } from "@/types";
 import { Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import React, { type FC } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -29,25 +28,24 @@ const CardProduct: FC<CardProductProps> = ({
     },
   } = useAppTheme();
 
-  const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
-  const { data: content } = useGetContentByLocale(locale);
+  const { content } = useRenderContentCardProduct({ size, price });
 
   return (
     <Card
       shadow="sm"
-      className="p-2 min-h-[200px] z-0"
+      className="p-2 min-h-[220px] max-sm:min-h-[260px] z-0"
       onDoubleClick={() => onRemove?.(id)}
       isPressable
     >
-      <CardBody className="overflow-visible p-0">
-        <div className="position w-fit h-fit ">
+      <CardBody className="p-0">
+        <div className="position ">
           <Image
             shadow="sm"
             radius="sm"
             width="100%"
             alt="default-product-image"
             loading="lazy"
-            className="w-full shadow-none border-none object-cover h-[180px] max-md:h-[140px] max-sm:h-[180px]"
+            className="shadow-none border-none object-cover max-h-[180px] max-md:h-[140px] max-sm:h-[160px]"
             src={image}
           />
           <Button
@@ -76,7 +74,7 @@ const CardProduct: FC<CardProductProps> = ({
               aria-label="size-product"
               className="text-foreground-400 text-[16px] ml-1"
             >
-              {content?.product_details.size_label.replaceAll("{{}}", size)}
+              {content.price}
             </span>
           </CardHeader>
           <Button
@@ -98,7 +96,7 @@ const CardProduct: FC<CardProductProps> = ({
             } w-6 h-6 mr-2 p-1 rounded-md`}
           />
           <h2 aria-label="price" className="text-lg font-medium">
-            {content?.product_details.price_label.replaceAll("{{}}", price)}
+            {content.price}
           </h2>
         </span>
       </CardBody>

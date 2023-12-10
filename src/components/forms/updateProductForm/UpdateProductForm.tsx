@@ -13,7 +13,7 @@ const UpdateProductForm = () => {
   } = useRenderContentProductForm(ACTIVE_MODAL.UPDATE_PRODUCT);
 
   const {
-    state: { formValues, updateProductValues },
+    state: { formValues, updateProductValues, isDisabledSubmit },
     action: { onChange, onSubmit, onCancel },
   } = useUpdateProduct();
 
@@ -61,7 +61,12 @@ const UpdateProductForm = () => {
             </div>
           </div>
           <footer about="form-footer" className="flex justify-center space-x-3">
-            <Button type="submit" size="lg" aria-label="update-product-btn">
+            <Button
+              type="submit"
+              isDisabled={isDisabledSubmit}
+              size="lg"
+              aria-label="update-product-btn"
+            >
               {formProductContent.submit_btn}
             </Button>
             <Button

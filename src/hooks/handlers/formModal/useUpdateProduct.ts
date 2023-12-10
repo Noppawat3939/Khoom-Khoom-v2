@@ -3,10 +3,10 @@ import { productForm } from "@/constants";
 import { useModalStore, useProductsStore } from "@/stores";
 import type { UpdateProduct } from "@/types";
 import { _string } from "@/utils";
-import { isEmpty } from "lodash";
+import { identity, isEmpty } from "lodash";
 import {
-  ChangeEvent,
-  FormEvent,
+  type ChangeEvent,
+  type FormEvent,
   useCallback,
   useEffect,
   useState,
@@ -73,8 +73,18 @@ const useUpdateProduct = () => {
     resetUpdateFormState();
   }, []);
 
+  const isDisabledSubmit = [
+    !updateProductValues.productName.trim(),
+    !updateProductValues.price,
+    !updateProductValues.size,
+  ].some(identity);
+
   return {
-    state: { formValues: updateProductForm, updateProductValues },
+    state: {
+      isDisabledSubmit,
+      formValues: updateProductForm,
+      updateProductValues,
+    },
     action: {
       onChange: onUpdateProductChange,
       onSubmit: onSubmitUpdateProductForm,

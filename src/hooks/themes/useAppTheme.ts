@@ -1,10 +1,13 @@
+import { setDate } from "@/utils";
 import dayjs from "dayjs";
 
-const useAppTheme = () => {
-  const firstDayOfNewYear = dayjs("2024-01-01");
+const HOURS = { AFTERNOON: 12, NIGHT: 18 } as const;
 
-  const afternoon = dayjs().set("hour", 12).toISOString();
-  const night = dayjs().set("hour", 18).toISOString();
+const useAppTheme = () => {
+  const firstDayOfNewYear = dayjs().startOf("year").add(1, "year");
+
+  const afternoon = setDate({ hour: HOURS.AFTERNOON }).toISOString();
+  const night = setDate({ hour: HOURS.NIGHT }).toISOString();
 
   const times = {
     isMorning: dayjs().isBefore(afternoon),
@@ -14,8 +17,13 @@ const useAppTheme = () => {
 
   const shouldShowSnowBall = firstDayOfNewYear.isAfter(dayjs());
 
+  const theme = {
+    light: [times.isAfternoon, times.isMorning].some(Boolean),
+    dark: times.isNight,
+  };
+
   return {
-    state: { shouldShowSnowBall, times },
+    state: { shouldShowSnowBall, times, theme },
   };
 };
 

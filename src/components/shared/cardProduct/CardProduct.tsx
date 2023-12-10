@@ -23,9 +23,7 @@ const CardProduct: FC<CardProductProps> = ({
   id,
 }) => {
   const {
-    state: {
-      times: { isNight },
-    },
+    state: { theme },
   } = useAppTheme();
 
   const { content } = useRenderContentCardProduct({ size, price });
@@ -63,7 +61,7 @@ const CardProduct: FC<CardProductProps> = ({
             <span className="flex items-center">
               <MdDriveFileRenameOutline
                 className={`${
-                  isNight
+                  theme.dark
                     ? " bg-foreground-100 text-foreground-400"
                     : "bg-green-100 text-green-500"
                 } w-6 h-6 mr-2 p-1 rounded-md`}
@@ -90,7 +88,7 @@ const CardProduct: FC<CardProductProps> = ({
         <span className="flex items-center mt-auto space-x-1">
           <IoPricetagOutline
             className={`${
-              isNight
+              theme.dark
                 ? " bg-foreground-100 text-foreground-400"
                 : "bg-green-100 text-green-500"
             } w-6 h-6 mr-2 p-1 rounded-md`}

@@ -2,6 +2,7 @@
 
 import { EMPTY_STRING, ZERO } from "@/constants";
 import {
+  useAppTheme,
   useGetContentByLocale,
   useHandleFormModal,
   useMutateCompareProduct,
@@ -15,6 +16,10 @@ const useHandleBanner = (locale: Locale) => {
   const { products } = useProductsStore((store) => ({
     products: store.products,
   }));
+
+  const {
+    state: { times },
+  } = useAppTheme();
 
   const {
     action: {
@@ -41,6 +46,15 @@ const useHandleBanner = (locale: Locale) => {
   const { data: content, isFetched } = useGetContentByLocale(locale);
   const [values, setValues] = useState(0);
 
+  const renderProductImage = (): string => {
+    if (times.isMorning)
+      return "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    if (times.isAfternoon)
+      return "https://images.unsplash.com/photo-1422207049116-cfaf69531072?q=80&w=2035&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+    return "https://images.unsplash.com/photo-1494698853255-d0fa521abc6c?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  };
+
   const handleBannerProps = () => {
     const title = _string(content?.main.title_banner);
 
@@ -62,6 +76,7 @@ const useHandleBanner = (locale: Locale) => {
               })
               .catch(() => handleOpenFailedModal()),
         },
+        productImage: renderProductImage(),
       };
     if (products.length === 1)
       return {
@@ -69,6 +84,7 @@ const useHandleBanner = (locale: Locale) => {
         textBtn: _string(content?.main.add_more_btn),
         description: _string(content?.main.description_compare_banner),
         onClick: { add: handleOpenCreateProduct, compare: () => null },
+        productImage: renderProductImage(),
       };
 
     return {
@@ -78,6 +94,7 @@ const useHandleBanner = (locale: Locale) => {
       }`,
       description: _string(content?.main.description_banner),
       onClick: { add: handleOpenCreateProduct, compare: () => null },
+      productImage: renderProductImage(),
     };
   };
 

@@ -3,14 +3,16 @@ import React, { type FC } from "react";
 import { Button, CardProduct } from "..";
 import { useProductsStore } from "@/stores";
 import { isEmpty, isObject, isString } from "lodash";
+import type { ModifyProps } from "@/types";
 
-type ModifyProps<T> = Record<"add" | "compare", T>;
+type Key = "add" | "compare";
 
 type BannerProps = {
   title: string;
   description: string;
-  textBtn: string | ModifyProps<string>;
-  onClick: ModifyProps<() => void>;
+  textBtn: string | ModifyProps<Key, string>;
+  productImage: string;
+  onClick: ModifyProps<Key, () => void>;
   onRemove: (removeId?: string) => void;
   onUpdate: (updateId?: string) => void;
 };
@@ -22,9 +24,10 @@ const Banner: FC<BannerProps> = ({
   onClick,
   onRemove,
   onUpdate,
+  productImage,
 }) => {
   const {
-    state: { times },
+    state: { times, theme },
   } = useAppTheme();
 
   const { isPending } = useMutateStateCompareProduct();
@@ -32,15 +35,6 @@ const Banner: FC<BannerProps> = ({
   const { products } = useProductsStore((store) => ({
     products: store.products,
   }));
-
-  const renderProductImage = (): string => {
-    if (times.isMorning)
-      return "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-    if (times.isAfternoon)
-      return "https://images.unsplash.com/photo-1422207049116-cfaf69531072?q=80&w=2035&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-    return "https://images.unsplash.com/photo-1494698853255-d0fa521abc6c?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-  };
 
   return (
     <section
@@ -84,7 +78,7 @@ const Banner: FC<BannerProps> = ({
             isLoading={isPending}
             onClick={onClick.add}
             className={`mt-5 text-lg ${
-              times.isNight ? "text-foreground-700" : "text-gray-400"
+              theme.dark ? "text-foreground-100" : "text-gray-400"
             }`}
             variant="bordered"
             about="create-product-btn"
@@ -95,9 +89,9 @@ const Banner: FC<BannerProps> = ({
             isDisabled={isPending}
             onClick={onClick.compare}
             className={`mt-5 text-lg ${
-              times.isNight ? "text-foreground-700" : "text-gray-100"
+              theme.dark ? "text-foreground-700" : "text-gray-100"
             }`}
-            variant="shadow"
+            variant={theme.dark ? "shadow" : "solid"}
             color="default"
             about="compare-product-btn"
           >
@@ -115,7 +109,7 @@ const Banner: FC<BannerProps> = ({
           products.map((product) => (
             <CardProduct
               {...product}
-              image={renderProductImage()}
+              image={productImage}
               key={product.id}
               onRemove={onRemove}
               onUpdate={onUpdate}

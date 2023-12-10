@@ -12,9 +12,7 @@ import React from "react";
 
 const MainContainer = () => {
   const {
-    state: {
-      times: { isNight },
-    },
+    state: { theme },
   } = useAppTheme();
 
   const {
@@ -35,6 +33,7 @@ const MainContainer = () => {
           description={bannerProps.description}
           textBtn={bannerProps.textBtn}
           onClick={bannerProps.onClick}
+          productImage={bannerProps.productImage}
           onRemove={handleOpenDeleteModal}
           onUpdate={handleOpenUpdateProduct}
         />
@@ -45,7 +44,7 @@ const MainContainer = () => {
           isIconOnly
           variant="bordered"
           onClick={onLocaleChange}
-          className={`${isNight ? "text-white" : "text-slate-400"} text-md`}
+          className={`${theme.dark ? "text-white" : "text-slate-400"} text-md`}
         >
           {localeLabel}
         </Button>

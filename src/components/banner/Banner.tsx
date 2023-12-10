@@ -1,4 +1,4 @@
-import { useAppTheme } from "@/hooks";
+import { useAppTheme, useMutateStateCompareProduct } from "@/hooks";
 import React, { type FC } from "react";
 import { Button, CardProduct } from "..";
 import { useProductsStore } from "@/stores";
@@ -12,6 +12,7 @@ type BannerProps = {
   textBtn: string | ModifyProps<string>;
   onClick: ModifyProps<() => void>;
   onRemove: (removeId?: string) => void;
+  onUpdate: (updateId?: string) => void;
 };
 
 const Banner: FC<BannerProps> = ({
@@ -20,10 +21,13 @@ const Banner: FC<BannerProps> = ({
   textBtn,
   onClick,
   onRemove,
+  onUpdate,
 }) => {
   const {
     state: { times },
   } = useAppTheme();
+
+  const { isPending } = useMutateStateCompareProduct();
 
   const { products } = useProductsStore((store) => ({
     products: store.products,
@@ -77,6 +81,7 @@ const Banner: FC<BannerProps> = ({
       ) : (
         <div className="flex space-x-3">
           <Button
+            isLoading={isPending}
             onClick={onClick.add}
             className={`mt-5 text-lg ${
               times.isNight ? "text-foreground-700" : "text-gray-400"
@@ -87,6 +92,7 @@ const Banner: FC<BannerProps> = ({
             {isObject(textBtn) && textBtn.add}
           </Button>
           <Button
+            isDisabled={isPending}
             onClick={onClick.compare}
             className={`mt-5 text-lg ${
               times.isNight ? "text-foreground-700" : "text-gray-100"
@@ -109,6 +115,7 @@ const Banner: FC<BannerProps> = ({
               image={renderProductImage()}
               key={product.id}
               onRemove={onRemove}
+              onUpdate={onUpdate}
             />
           ))}
       </section>

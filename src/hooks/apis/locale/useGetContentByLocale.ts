@@ -1,12 +1,12 @@
+import { QUERY_KEY } from "@/constants";
 import { getContent } from "@/services";
-import { useLocaleStore } from "@/stores";
 import type { Locale } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetContentByLocale = (locale: Locale) => {
   return useQuery({
     queryFn: () => getContent(locale),
-    queryKey: ["getContent", locale],
+    queryKey: [QUERY_KEY.GET_CONTENT, locale],
     select: (res) => res.data.data,
   });
 };

@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useProductsStore } from "@/stores";
+import { productForm } from "@/constants";
+import { useModalStore, useProductsStore } from "@/stores";
 import { CreateProduct } from "@/types";
 import { identity } from "lodash";
 import { type ChangeEvent, useCallback, useState, type FormEvent } from "react";
@@ -9,12 +11,12 @@ import { v4 as uuid } from "uuid";
 type CreateProductValues = Record<CreateProduct, string>;
 
 const useCreateProduct = () => {
-  const createProductForm = {
-    productName: "",
-    size: "",
-    price: "",
-    quantity: "",
-  };
+  const createProductForm = productForm;
+
+  const { openModal, onCloseModal } = useModalStore((store) => ({
+    openModal: store.open,
+    onCloseModal: store.onClose,
+  }));
 
   const { products, addedProduct } = useProductsStore((store) => ({
     products: store.products,
@@ -48,6 +50,11 @@ const useCreateProduct = () => {
     setTimeout(onResetCreateProductValues, 300);
   };
 
+  const handleCancelForm = useCallback(() => {
+    onCloseModal();
+    onResetCreateProductValues();
+  }, []);
+
   const isDisabledSubmit = [
     !createProductValues.productName.trim(),
     !createProductValues.price,
@@ -55,11 +62,18 @@ const useCreateProduct = () => {
   ].some(identity);
 
   return {
-    state: { createProductValues, isDisabledSubmit, createProductForm },
+    state: {
+      openModal,
+      createProductValues,
+      isDisabledSubmit,
+      formValues: createProductForm,
+    },
     action: {
-      onCreateProductChange,
+      onChange: onCreateProductChange,
       onSubmit: onSubmitCreateProductForm,
       resetForm: onResetCreateProductValues,
+      onCloseModal,
+      onCancel: handleCancelForm,
     },
   };
 };

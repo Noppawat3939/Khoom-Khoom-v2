@@ -19,6 +19,11 @@ const useHandleFormModal = () => {
     []
   );
 
+  const handleOpenUpdateProduct = useCallback((updateId?: string) => {
+    setParams({ updateId });
+    onOpenChange(ACTIVE_MODAL.UPDATE_PRODUCT);
+  }, []);
+
   const handleOpenCompareProduct = useCallback(
     () => onOpenChange(ACTIVE_MODAL.COMPARE_PRODUCT),
     []
@@ -51,6 +56,7 @@ const useHandleFormModal = () => {
       handleResetCompareProducts,
       handleOpenFailedModal,
       handleOpenDeleteModal,
+      handleOpenUpdateProduct,
     },
     state: { openModal: open },
   };

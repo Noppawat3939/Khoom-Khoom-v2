@@ -14,6 +14,7 @@ type UseModalStore = {
 
 const initialState = {
   open: null,
+  params: null,
   compareProducts: { data: [], isEqual: false },
 };
 
@@ -21,7 +22,8 @@ export const useModalStore = create<UseModalStore>((set) => ({
   open: null,
   params: null,
   onOpenChange: (open) => set(() => ({ open })),
-  onClose: () => set(() => ({ open: initialState.open })),
+  onClose: () =>
+    set(() => ({ open: initialState.open, params: initialState.params })),
   compareProducts: initialState.compareProducts,
   setCompareProducts: (compareProducts) => set(() => ({ compareProducts })),
   resetCompareProducts: () =>

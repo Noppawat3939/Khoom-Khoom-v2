@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useGetContentByLocale } from "@/hooks";
 import { useLocaleStore, useModalStore, useProductsStore } from "@/stores";
+import type { RemoveProductParam } from "@/types";
 import { _string } from "@/utils";
 import { useCallback, useTransition } from "react";
 
 const useDeleteProduct = () => {
   const [isPending, startTransition] = useTransition();
 
-  const { open, onClose, params, setParams } = useModalStore((store) => ({
+  const { open, onClose, params } = useModalStore((store) => ({
     open: store.open,
     onClose: store.onClose,
     onOpenChange: store.onOpenChange,
     params: store.params,
-    setParams: store.setParams,
   }));
 
-  const _params = params as { removeId: string };
+  const removeParam = params as RemoveProductParam;
 
   const { products, removedProduct } = useProductsStore((store) => ({
     products: store.products,
@@ -25,12 +25,9 @@ const useDeleteProduct = () => {
   const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
   const { data: content } = useGetContentByLocale(locale);
 
-  const handleCloseModal = useCallback(() => {
-    onClose();
-    setParams(null);
-  }, []);
+  const handleCloseModal = useCallback(() => onClose(), []);
 
-  const product = products.find((prd) => prd.id === params?.removeId);
+  const product = products.find((prd) => prd.id === removeParam?.removeId);
 
   const deleteProductContent = {
     title: content?.delete_product.title.replaceAll(
@@ -42,7 +39,7 @@ const useDeleteProduct = () => {
 
   const handleRemovedProduct = () => {
     startTransition(() => {
-      removedProduct(_params.removeId);
+      removedProduct(_string(removeParam?.removeId));
       handleCloseModal();
     });
   };

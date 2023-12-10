@@ -1,10 +1,11 @@
+import { QUERY_KEY } from "@/constants";
 import { compareProducts } from "@/services";
 import { useMutation } from "@tanstack/react-query";
 
 const useMutateCompareProduct = () => {
   return useMutation({
     mutationFn: compareProducts,
-    mutationKey: ["compareProducts"],
+    mutationKey: [QUERY_KEY.COMPARE],
   });
 };
 

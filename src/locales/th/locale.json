@@ -4,7 +4,7 @@
         "description_banner": "มาค้นหาราคาสินค้าที่ดีที่สุด สำหรับคุณกันเถอะ",
         "description_compare_banner": "ลองเปรียบเทียบสินค้าของคุณดูไหม ?",
         "start_btn_banner": "เริ่มสร้างรายการ",
-        "add_more_btn": "เพิ่มอีก 1 รายการสิ",
+        "add_more_btn": "เพิ่มอีก 1 รายการ",
         "compare_btn": "เปรียบเทียบสินค้าทั้งหมด"
     },
     "create_product": {
@@ -17,8 +17,21 @@
         "product_quantity_placeholder": "1",
         "product_price_label": "ราคาสินค้า",
         "product_price_placeholder": "45",
-        "create_product_btn": "สร้างรายการสินค้า",
+        "submit_product_btn": "สร้างรายการสินค้า",
         "cancel_product_btn": "ยกเลิกรายการ"
+    },
+    "update_product": {
+        "title": "แก้ไขข้อมูลสินค้า {{}}",
+        "product_name_label": "ชื่อสินค้า",
+        "product_name_placeholder": "ช็อคโกแลต, คิทแคท",
+        "product_size_label": "ขนาดสินค้า",
+        "product_size_placeholder": "100",
+        "product_quantity_label": "ปริมาณ (ไม่จำเป็น)",
+        "product_quantity_placeholder": "1",
+        "product_price_label": "ราคาสินค้า",
+        "product_price_placeholder": "45",
+        "submit_product_btn": "ยืนยันแก้ไขรายการ",
+        "cancel_product_btn": "ยกเลิกการแก้ไข"
     },
     "compare_product": {
         "cheapest_one_product_title": "มีราคาถูก และ ค้มค่า มากที่สุดสำหรับคุณ",

@@ -1,4 +1,10 @@
-import { Banner, Container, CreateProductForm, SnowBall } from "@/components";
+import {
+  Banner,
+  Container,
+  CreateProductForm,
+  SnowBall,
+  UpdateProductForm,
+} from "@/components";
 import { useAppTheme, useHandleBanner, useHandleLocale } from "@/hooks";
 import { _string } from "@/utils";
 import { Button } from "@nextui-org/react";
@@ -17,8 +23,8 @@ const MainContainer = () => {
   } = useHandleLocale();
 
   const {
-    state: { bannerProps, openModal, isFetched },
-    action: { handleSetValue, handleCloseModal, handleOpenDeleteModal },
+    state: { bannerProps, isFetched },
+    action: { handleSetValue, handleOpenDeleteModal, handleOpenUpdateProduct },
   } = useHandleBanner(locale);
 
   return (
@@ -30,6 +36,7 @@ const MainContainer = () => {
           textBtn={bannerProps.textBtn}
           onClick={bannerProps.onClick}
           onRemove={handleOpenDeleteModal}
+          onUpdate={handleOpenUpdateProduct}
         />
       )}
 
@@ -46,11 +53,8 @@ const MainContainer = () => {
 
       <SnowBall />
 
-      <CreateProductForm
-        setValues={handleSetValue}
-        open={openModal}
-        onClose={handleCloseModal}
-      />
+      <CreateProductForm setValues={handleSetValue} />
+      <UpdateProductForm />
     </Container>
   );
 };

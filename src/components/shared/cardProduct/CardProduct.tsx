@@ -11,6 +11,7 @@ import { FaRegEdit } from "react-icons/fa";
 type CardProductProps = {
   image: string;
   onRemove: (removeId?: string) => void;
+  onUpdate: (updateId?: string) => void;
 } & Product;
 
 const CardProduct: FC<CardProductProps> = ({
@@ -19,6 +20,7 @@ const CardProduct: FC<CardProductProps> = ({
   productName,
   size,
   onRemove,
+  onUpdate,
   id,
 }) => {
   const {
@@ -50,8 +52,9 @@ const CardProduct: FC<CardProductProps> = ({
           />
           <Button
             isIconOnly
+            onClick={() => onUpdate(id)}
             variant="faded"
-            aria-label="edit-product-btn"
+            aria-label="update-product-btn"
             className="absolute rounded-lg top-1 right-1 z-10 shadow-sm"
           >
             <FaRegEdit className="w-7 h-7 p-1 text-foreground-500" />

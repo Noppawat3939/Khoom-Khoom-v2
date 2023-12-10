@@ -8,7 +8,7 @@ type MainContent =
   | "compare_btn"
   | "add_more_btn";
 
-type CreateProductContent =
+type ProductFormContent =
   | "title"
   | "product_name_label"
   | "product_name_placeholder"
@@ -18,7 +18,7 @@ type CreateProductContent =
   | "product_quantity_placeholder"
   | "product_price_label"
   | "product_price_placeholder"
-  | "create_product_btn"
+  | "submit_product_btn"
   | "cancel_product_btn";
 
 type CompareProductContent =
@@ -34,7 +34,8 @@ type ProductDetailsContent = "name_label" | "price_label" | "size_label";
 
 export interface ContentByLocale {
   main: Record<MainContent, string>;
-  create_product: Record<CreateProductContent, string>;
+  create_product: Record<ProductFormContent, string>;
+  update_product: Record<ProductFormContent, string>;
   compare_product: Record<CompareProductContent, string>;
   failed_modal: Record<FailedModalContent, string>;
   delete_product: Record<DeleteProductContent, string>;

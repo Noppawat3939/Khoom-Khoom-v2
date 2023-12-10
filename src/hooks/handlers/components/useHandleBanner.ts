@@ -1,5 +1,6 @@
 "use client";
 
+import { EMPTY_STRING, ZERO } from "@/constants";
 import {
   useGetContentByLocale,
   useHandleFormModal,
@@ -20,6 +21,7 @@ const useHandleBanner = (locale: Locale) => {
       handleOpenCompareProduct,
       handleSetCompareProducts,
       handleOpenDeleteModal,
+      handleOpenUpdateProduct,
     },
   } = useHandleFormModal();
 
@@ -72,7 +74,7 @@ const useHandleBanner = (locale: Locale) => {
     return {
       title,
       textBtn: `${_string(content?.main.start_btn_banner)} ${
-        values !== 0 ? `(${values})` : ""
+        values !== ZERO ? `(${values})` : EMPTY_STRING
       }`,
       description: _string(content?.main.description_banner),
       onClick: { add: handleOpenCreateProduct, compare: () => null },
@@ -83,7 +85,12 @@ const useHandleBanner = (locale: Locale) => {
 
   return {
     state: { bannerProps: handleBannerProps(), openModal, isFetched },
-    action: { handleSetValue, handleCloseModal, handleOpenDeleteModal },
+    action: {
+      handleSetValue,
+      handleCloseModal,
+      handleOpenDeleteModal,
+      handleOpenUpdateProduct,
+    },
   };
 };
 

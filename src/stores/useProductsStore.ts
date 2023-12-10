@@ -7,6 +7,7 @@ type UseProductsStore = {
   addedProduct: (newProduct: Product[]) => void;
   removedProduct: (id: string) => void;
   clearProducts: () => void;
+  updatedProduct: (newProduct: Product, productId: string) => void;
 };
 
 export const useProductsStore = create<UseProductsStore>((set) => ({
@@ -19,4 +20,10 @@ export const useProductsStore = create<UseProductsStore>((set) => ({
         : [],
     })),
   clearProducts: () => set(() => ({ products: [] })),
+  updatedProduct: (updateProduct, updateId) =>
+    set(({ products: prevProducts }) => ({
+      products: prevProducts.map((product) =>
+        product.id === updateId ? { ...product, ...updateProduct } : product
+      ),
+    })),
 }));

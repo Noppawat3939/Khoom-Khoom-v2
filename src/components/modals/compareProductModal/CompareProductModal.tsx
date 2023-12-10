@@ -12,7 +12,7 @@ import React from "react";
 import ThumbUpImage from "@/assets/png/thumb-up.png";
 import EqualImage from "@/assets/png/equal.png";
 import Image from "next/image";
-import { ACTIVE_MODAL } from "@/constants";
+import { ACTIVE_MODAL, VARIABLE_CONTENT } from "@/constants";
 import { useCompareProducts } from "@/hooks";
 
 const CompareProductModal = () => {
@@ -46,6 +46,9 @@ const CompareProductModal = () => {
                 className="justify-center p-0 flex flex-col items-center text-2xl max-md:text-xl"
               >
                 {`"${data.productName}"`}
+                <p className="text-[16px] font-normal">
+                  {content.size.replaceAll(VARIABLE_CONTENT, data.size)}
+                </p>
                 <span className="mt-2 text-xl max-md:text-lg font-normal">
                   {content.title}
                 </span>

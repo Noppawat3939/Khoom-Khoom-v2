@@ -89,7 +89,7 @@ const Banner: FC<BannerProps> = ({
             isDisabled={isPending}
             onClick={onClick.compare}
             className={`mt-5 text-lg ${
-              theme.dark ? "text-foreground-700" : "text-gray-100"
+              theme.dark ? "text-foreground-700" : "text-gray-100 bg-[#1B9C85]"
             }`}
             variant={theme.dark ? "shadow" : "solid"}
             color="default"

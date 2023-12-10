@@ -39,16 +39,18 @@ const MainContainer = () => {
         />
       )}
 
-      <span className="absolute right-3 top-1">
-        <Button
-          isIconOnly
-          variant="bordered"
-          onClick={onLocaleChange}
-          className={`${theme.dark ? "text-white" : "text-slate-400"} text-md`}
-        >
-          {localeLabel}
-        </Button>
-      </span>
+      <Button
+        isIconOnly
+        variant={theme.dark ? "shadow" : "bordered"}
+        onClick={onLocaleChange}
+        size="sm"
+        aria-label="change-locale-btn"
+        className={`${
+          theme.dark ? "text-gray-600" : "text-gray-300"
+        } text-sm fixed right-3 top-1 mt-1`}
+      >
+        {localeLabel}
+      </Button>
 
       <SnowBall />
 

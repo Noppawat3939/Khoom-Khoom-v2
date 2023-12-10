@@ -35,6 +35,7 @@
     },
     "compare_product": {
         "cheapest_one_product_title": "มีราคาถูก และ ค้มค่า มากที่สุดสำหรับคุณ",
+        "cheapest_one_product_size": "ขนาด {{}}",
         "equal_products_title": "มีราคาเท่ากันทั้งหมด (เลือกอะไรก็ได้)",
         "close_btn": "ปิด"
     },

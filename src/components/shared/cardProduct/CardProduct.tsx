@@ -72,7 +72,7 @@ const CardProduct: FC<CardProductProps> = ({
               aria-label="size-product"
               className="text-foreground-400 text-[16px] ml-1"
             >
-              {content.price}
+              {content.size}
             </span>
           </CardHeader>
           <Button

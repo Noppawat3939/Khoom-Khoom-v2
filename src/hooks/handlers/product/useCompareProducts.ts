@@ -1,3 +1,4 @@
+import { EMPTY_STRING } from "@/constants";
 import { useGetContentByLocale } from "@/hooks";
 import { useLocaleStore, useModalStore } from "@/stores";
 import { _string } from "@/utils";
@@ -35,12 +36,16 @@ const useCompareProducts = () => {
     if (hasOne || hasMoreThanOne)
       return {
         title: _string(content?.compare_product.cheapest_one_product_title),
+        size: hasOne
+          ? _string(content?.compare_product.cheapest_one_product_size)
+          : EMPTY_STRING,
         close_btn: _string(content?.compare_product.close_btn),
       };
 
     // has equal values
     return {
       title: _string(content?.compare_product.equal_products_title),
+      size: EMPTY_STRING,
       close_btn: _string(content?.compare_product.close_btn),
     };
   };

@@ -23,6 +23,7 @@ type ProductFormContent =
 
 type CompareProductContent =
   | "cheapest_one_product_title"
+  | "cheapest_one_product_size"
   | "close_btn"
   | "equal_products_title";
 

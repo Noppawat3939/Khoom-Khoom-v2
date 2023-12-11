@@ -9,10 +9,7 @@ import {
 } from "@/hooks";
 import { eq, isEmpty } from "lodash";
 import { ACTIVE_MODAL } from "@/constants";
-
-type CreateProductFormProps = {
-  setValues: (valueLen: number) => void;
-};
+import type { CreateProductFormProps } from "./create-product-form-type";
 
 const CreateProductForm: FC<CreateProductFormProps> = ({ setValues }) => {
   const {

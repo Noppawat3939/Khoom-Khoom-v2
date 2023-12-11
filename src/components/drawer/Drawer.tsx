@@ -1,10 +1,6 @@
-import React, { PropsWithChildren, type FC } from "react";
+import React, { type FC } from "react";
 import { Drawer as VDrawer } from "vaul";
-
-type DrawerProps = {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-} & PropsWithChildren;
+import type { DrawerProps } from "./drawer-type";
 
 const Drawer: FC<DrawerProps> = ({ onOpenChange, open, children }) => {
   return (

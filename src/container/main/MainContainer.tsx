@@ -1,14 +1,17 @@
+"use client";
+
+import React from "react";
 import {
   Banner,
   Container,
   CreateProductForm,
+  Rain,
   SnowBall,
   UpdateProductForm,
 } from "@/components";
-import { useHandleBanner, useHandleLocale, useMediaQuery } from "@/hooks";
+import { useHandleBanner, useHandleLocale } from "@/hooks";
 import { _string } from "@/utils";
 import { Button } from "@nextui-org/react";
-import React from "react";
 
 const MainContainer = () => {
   const {
@@ -29,7 +32,6 @@ const MainContainer = () => {
           description={bannerProps.description}
           textBtn={bannerProps.textBtn}
           onClick={bannerProps.onClick}
-          productImage={bannerProps.productImage}
           onRemove={handleOpenDeleteModal}
           onUpdate={handleOpenUpdateProduct}
         />
@@ -48,6 +50,7 @@ const MainContainer = () => {
       )}
 
       <SnowBall />
+      <Rain />
 
       <CreateProductForm setValues={handleSetValue} />
       <UpdateProductForm />

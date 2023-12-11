@@ -4,6 +4,8 @@ import { useLocaleStore } from "@/stores";
 import type { Locale } from "@/types";
 import { useEffect, useTransition } from "react";
 
+type LocaleStore = Locale | null | undefined;
+
 const useHandleLocale = () => {
   const { locale, setLocale } = useLocaleStore();
   const [, startTransition] = useTransition();
@@ -11,7 +13,7 @@ const useHandleLocale = () => {
   useEffect(() => {
     try {
       const currentLang = () =>
-        window.localStorage.getItem("locale") as Locale | null | undefined;
+        window.localStorage.getItem("locale") as LocaleStore;
 
       if (currentLang() === "en") {
         setLocale("en");

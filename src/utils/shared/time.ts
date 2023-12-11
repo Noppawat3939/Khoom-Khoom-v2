@@ -1,6 +1,6 @@
 import type { TDate } from "@/types";
 import dayjs from "dayjs";
-import { _number } from ".";
+import { _number } from "@/utils";
 
 type SetDate = { date: TDate; hour: number; minute: number; second: number };
 

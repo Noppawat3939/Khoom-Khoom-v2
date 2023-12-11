@@ -1,26 +1,14 @@
+import React, { type FC } from "react";
 import {
   useAppTheme,
   useMediaQuery,
   useMutateStateCompareProduct,
 } from "@/hooks";
-import React, { type FC } from "react";
 import { Button, CardProduct, CardProductMobileSize } from "..";
 import { useProductsStore } from "@/stores";
 import { isEmpty, isObject, isString } from "lodash";
-import type { ModifyProps } from "@/types";
 import { Badge } from "@nextui-org/react";
-
-type Key = "add" | "compare";
-
-type BannerProps = {
-  title: string;
-  description: string;
-  textBtn: string | ModifyProps<Key, string>;
-  productImage: string;
-  onClick: ModifyProps<Key, () => void>;
-  onRemove: (removeId?: string) => void;
-  onUpdate: (updateId?: string) => void;
-};
+import type { BannerProps } from "./banner-type";
 
 const Banner: FC<BannerProps> = ({
   title,
@@ -29,7 +17,6 @@ const Banner: FC<BannerProps> = ({
   onClick,
   onRemove,
   onUpdate,
-  productImage,
 }) => {
   const {
     state: { times, theme },
@@ -135,7 +122,6 @@ const Banner: FC<BannerProps> = ({
           products.map((product) => (
             <CardProduct
               {...product}
-              image={productImage}
               key={product.id}
               onRemove={onRemove}
               onUpdate={onUpdate}

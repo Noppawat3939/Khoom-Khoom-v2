@@ -1,4 +1,4 @@
-import { Times } from "@/types";
+import type { Times } from "@/types";
 
 export const renderSnowProperties = (times: Times) => {
   if (times.isMorning) return { snowflakeCount: 50, color: "white" };

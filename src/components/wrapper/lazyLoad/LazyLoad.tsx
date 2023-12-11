@@ -1,4 +1,4 @@
-import React, { type FC, Suspense, PropsWithChildren } from "react";
+import React, { type FC, Suspense, type PropsWithChildren } from "react";
 import { LoadingModal } from "../..";
 
 const LazyLoad: FC<PropsWithChildren> = ({ children }) => {

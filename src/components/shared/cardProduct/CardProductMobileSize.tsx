@@ -1,5 +1,5 @@
+import React, { type FC } from "react";
 import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
-import { Product } from "@/types";
 import {
   Badge,
   Button,
@@ -8,15 +8,9 @@ import {
   CardFooter,
   Chip,
 } from "@nextui-org/react";
-import React, { type FC } from "react";
 import { FaRegEdit, FaShoppingCart } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-
-type CardProductMobileSizeProps = {
-  onRemove: (removeId?: string) => void;
-  onUpdate: (updateId?: string) => void;
-  order: number;
-} & Product;
+import type { CardProductMobileSizeProps } from "./card-product-type";
 
 const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   onRemove,
@@ -30,6 +24,7 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   const {
     state: { theme },
   } = useAppTheme();
+
   const { content } = useRenderContentCardProduct({ size, price });
 
   return (

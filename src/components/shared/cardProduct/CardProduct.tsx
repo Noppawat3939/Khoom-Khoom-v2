@@ -1,21 +1,17 @@
-import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
-import type { Product } from "@/types";
-import { Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import React, { type FC } from "react";
+import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
+import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoPricetagOutline } from "react-icons/io5";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { Chip } from "@nextui-org/react";
+import Image from "next/image";
 
-type CardProductProps = {
-  image: string;
-  onRemove: (removeId?: string) => void;
-  onUpdate: (updateId?: string) => void;
-} & Product;
+import productImage from "@/assets/png/product.png";
+import type { CardProductProps } from "./card-product-type";
 
 const CardProduct: FC<CardProductProps> = ({
-  image,
   price,
   productName,
   size,
@@ -39,13 +35,10 @@ const CardProduct: FC<CardProductProps> = ({
       <CardBody className="p-0">
         <div className="position ">
           <Image
-            shadow="sm"
-            radius="sm"
-            width="100%"
             alt="default-product-image"
             loading="lazy"
             className="shadow-none border-none object-cover max-h-[180px] max-md:h-[140px] max-sm:h-[160px]"
-            src={image}
+            src={productImage}
           />
           <Button
             isIconOnly

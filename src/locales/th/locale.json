@@ -11,9 +11,9 @@
         "title": "รายละเอียดสินค้า",
         "product_name_label": "ชื่อสินค้า",
         "product_name_placeholder": "ช็อคโกแลต, คิทแคท",
-        "product_size_label": "ขนาดสินค้า",
+        "product_size_label": "ปริมาณ/น้ำหนัก",
         "product_size_placeholder": "100",
-        "product_quantity_label": "ปริมาณ (ไม่จำเป็น)",
+        "product_quantity_label": "จำนวน (ไม่จำเป็น)",
         "product_quantity_placeholder": "1",
         "product_price_label": "ราคาสินค้า",
         "product_price_placeholder": "45",
@@ -24,9 +24,9 @@
         "title": "แก้ไขข้อมูลสินค้า {{}}",
         "product_name_label": "ชื่อสินค้า",
         "product_name_placeholder": "ช็อคโกแลต, คิทแคท",
-        "product_size_label": "ขนาดสินค้า",
+        "product_size_label": "ปริมาณ/น้ำหนัก",
         "product_size_placeholder": "100",
-        "product_quantity_label": "ปริมาณ (ไม่จำเป็น)",
+        "product_quantity_label": "จำนวน (ไม่จำเป็น)",
         "product_quantity_placeholder": "1",
         "product_price_label": "ราคาสินค้า",
         "product_price_placeholder": "45",
@@ -34,7 +34,7 @@
         "cancel_product_btn": "ยกเลิกการแก้ไข"
     },
     "compare_product": {
-        "cheapest_one_product_title": "มีราคาถูก และ ค้มค่า มากที่สุดสำหรับคุณ",
+        "cheapest_one_product_title": "มีราคาถูก และ คุ้มค่า มากที่สุดสำหรับคุณ",
         "cheapest_one_product_size": "ขนาด {{}}",
         "equal_products_title": "มีราคาเท่ากันทั้งหมด (เลือกอะไรก็ได้)",
         "close_btn": "ปิด"

@@ -46,7 +46,8 @@ const CreateProductForm: FC<CreateProductFormProps> = ({ setValues }) => {
             <div className="mt-[5%] flex flex-col gap-5">
               {Object.keys(formValues).map((key) => (
                 <Input
-                  aria-label={`${key}-input-value`}
+                  isRequired={key !== "quantity"}
+                  aria-label={`${key}-create-product-input-value`}
                   variant="flat"
                   label={
                     formProductContent.inputProps[key as CreateProduct].label

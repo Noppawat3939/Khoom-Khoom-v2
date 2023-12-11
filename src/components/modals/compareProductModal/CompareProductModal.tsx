@@ -14,6 +14,7 @@ import EqualImage from "@/assets/png/equal.png";
 import Image from "next/image";
 import { ACTIVE_MODAL, VARIABLE_CONTENT } from "@/constants";
 import { useCompareProducts } from "@/hooks";
+import { renderSeparate } from "@/utils";
 
 const CompareProductModal = () => {
   const {
@@ -55,33 +56,48 @@ const CompareProductModal = () => {
               </ModalHeader>
             ))}
           {productCount.hasMoreThanOne && (
-            <div className="flex flex-col w-full item-center">
+            <div
+              about="more-than-one-values"
+              className="flex flex-col w-full item-center"
+            >
               <div className="flex space-x-2 justify-center">
-                {data.data?.map((data) => (
-                  <ModalHeader
-                    key={data.id}
-                    className="p-0 text-2xl max-md:text-xl"
-                  >
-                    {data.productName}
-                  </ModalHeader>
-                ))}
+                {data.data?.map((_data, dataIdx) => {
+                  const _separate = renderSeparate(data.data!, dataIdx);
+
+                  return (
+                    <ModalHeader
+                      key={_data.id}
+                      className="p-0 text-2xl max-md:text-xl"
+                    >
+                      {`${_data.productName}${_separate}`}
+                    </ModalHeader>
+                  );
+                })}
               </div>
               <span className="text-center mt-2 text-xl max-md:text-lg font-normal">
                 {content.title}
               </span>
             </div>
           )}
+
           {productCount.hasEqual && (
-            <div className="flex flex-col w-full item-center">
+            <div
+              about="equal-values"
+              className="flex flex-col w-full item-center"
+            >
               <div className="flex space-x-2 justify-center">
-                {data.data?.map((data) => (
-                  <ModalHeader
-                    className="p-0 text-2xl max-md:text-xl"
-                    key={data.id}
-                  >
-                    {data.productName}
-                  </ModalHeader>
-                ))}
+                {data.data?.map((_data, dataIdx) => {
+                  const _separate = renderSeparate(data.data!, dataIdx);
+
+                  return (
+                    <ModalHeader
+                      className="p-0 text-2xl max-md:text-xl"
+                      key={_data.id}
+                    >
+                      {`${_data.productName}${_separate}`}
+                    </ModalHeader>
+                  );
+                })}
               </div>
               <span className="text-center mt-2 text-xl max-md:text-lg font-normal">
                 {content.title}

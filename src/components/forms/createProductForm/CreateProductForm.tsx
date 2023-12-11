@@ -2,7 +2,11 @@ import { Drawer } from "@/components";
 import type { CreateProduct } from "@/types";
 import { Button, Input } from "@nextui-org/react";
 import React, { type FC } from "react";
-import { useCreateProduct, useRenderContentProductForm } from "@/hooks";
+import {
+  useAppTheme,
+  useCreateProduct,
+  useRenderContentProductForm,
+} from "@/hooks";
 import { eq, isEmpty } from "lodash";
 import { ACTIVE_MODAL } from "@/constants";
 
@@ -15,6 +19,10 @@ const CreateProductForm: FC<CreateProductFormProps> = ({ setValues }) => {
     state: { formValues, openModal, createProductValues, isDisabledSubmit },
     action,
   } = useCreateProduct();
+
+  const {
+    state: { theme },
+  } = useAppTheme();
 
   const {
     state: { formProductContent },
@@ -67,10 +75,22 @@ const CreateProductForm: FC<CreateProductFormProps> = ({ setValues }) => {
             </div>
           </div>
           <footer about="form-footer" className="flex justify-center space-x-3">
-            <Button type="submit" size="lg" isDisabled={isDisabledSubmit}>
+            <Button
+              type="submit"
+              size="lg"
+              className={`text-white ${
+                theme.dark ? "bg-[#2b5988]" : "bg-[#1B9C85]"
+              }`}
+              isDisabled={isDisabledSubmit}
+            >
               {formProductContent.submit_btn}
             </Button>
-            <Button size="lg" variant="ghost" onClick={action.onCancel}>
+            <Button
+              size="lg"
+              variant="ghost"
+              className="text-foreground-500"
+              onClick={action.onCancel}
+            >
               {formProductContent.cancel_btn}
             </Button>
           </footer>

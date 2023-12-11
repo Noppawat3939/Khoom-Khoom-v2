@@ -5,7 +5,7 @@ import {
   SnowBall,
   UpdateProductForm,
 } from "@/components";
-import { useHandleBanner, useHandleLocale } from "@/hooks";
+import { useHandleBanner, useHandleLocale, useMediaQuery } from "@/hooks";
 import { _string } from "@/utils";
 import { Button } from "@nextui-org/react";
 import React from "react";

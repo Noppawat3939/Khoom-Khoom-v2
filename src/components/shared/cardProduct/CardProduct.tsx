@@ -6,6 +6,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { IoPricetagOutline } from "react-icons/io5";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import { Chip } from "@nextui-org/react";
 
 type CardProductProps = {
   image: string;
@@ -68,12 +69,9 @@ const CardProduct: FC<CardProductProps> = ({
               />
               {productName}
             </span>
-            <span
-              aria-label="size-product"
-              className="text-foreground-400 text-[16px] ml-1"
-            >
+            <Chip size="sm" className="ml-2 text-foreground-500" variant="flat">
               {content.size}
-            </span>
+            </Chip>
           </CardHeader>
           <Button
             onClick={() => onRemove?.(id)}

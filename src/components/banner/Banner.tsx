@@ -1,9 +1,14 @@
-import { useAppTheme, useMutateStateCompareProduct } from "@/hooks";
+import {
+  useAppTheme,
+  useMediaQuery,
+  useMutateStateCompareProduct,
+} from "@/hooks";
 import React, { type FC } from "react";
-import { Button, CardProduct } from "..";
+import { Button, CardProduct, CardProductMobileSize } from "..";
 import { useProductsStore } from "@/stores";
 import { isEmpty, isObject, isString } from "lodash";
 import type { ModifyProps } from "@/types";
+import { Badge } from "@nextui-org/react";
 
 type Key = "add" | "compare";
 
@@ -30,11 +35,16 @@ const Banner: FC<BannerProps> = ({
     state: { times, theme },
   } = useAppTheme();
 
+  const { isMobile } = useMediaQuery();
+
   const { isPending } = useMutateStateCompareProduct();
 
   const { products } = useProductsStore((store) => ({
     products: store.products,
   }));
+
+  const shouldRenderCardMobileSize = isMobile && !isEmpty(products);
+  const shouldRenderCardPcOrTabletSize = !isMobile && !isEmpty(products);
 
   return (
     <section
@@ -73,7 +83,7 @@ const Banner: FC<BannerProps> = ({
           {isString(textBtn) && textBtn}
         </Button>
       ) : (
-        <div className="flex space-x-3 max-sm:flex-col">
+        <div className="flex items-baseline space-x-3 max-sm:flex-col max-sm:gap-3 max-sm:items-center">
           <Button
             isLoading={isPending}
             onClick={onClick.add}
@@ -85,27 +95,43 @@ const Banner: FC<BannerProps> = ({
           >
             {isObject(textBtn) && textBtn.add}
           </Button>
-          <Button
-            isDisabled={isPending}
-            onClick={onClick.compare}
-            className={`mt-5 text-lg ${
-              theme.dark ? "text-foreground-700" : "text-gray-100 bg-[#1B9C85]"
-            }`}
-            variant={theme.dark ? "shadow" : "solid"}
-            color="default"
-            about="compare-product-btn"
-          >
-            {isObject(textBtn) && textBtn.compare}
-          </Button>
+
+          <Badge content={products.length} color="danger">
+            <Button
+              isDisabled={isPending}
+              onClick={onClick.compare}
+              className={`text-lg ${
+                theme.dark
+                  ? "text-foreground-700"
+                  : "text-gray-100 bg-[#1B9C85]"
+              }`}
+              variant={theme.dark ? "shadow" : "solid"}
+              color="default"
+              about="compare-product-btn"
+            >
+              {isObject(textBtn) && textBtn.compare}
+            </Button>
+          </Badge>
         </div>
       )}
 
       <br />
       <section
         about="render-product-details"
-        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1"
+        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1 max-sm:gap-2 max-sm:max-h-full"
       >
-        {!isEmpty(products) &&
+        {shouldRenderCardMobileSize &&
+          products.map((product, prdIdx) => (
+            <CardProductMobileSize
+              order={prdIdx + 1}
+              onRemove={onRemove}
+              onUpdate={onUpdate}
+              key={product.id}
+              {...product}
+            />
+          ))}
+
+        {shouldRenderCardPcOrTabletSize &&
           products.map((product) => (
             <CardProduct
               {...product}

@@ -67,6 +67,7 @@ const UpdateProductForm = () => {
               isDisabled={isDisabledSubmit}
               size="lg"
               aria-label="update-product-btn"
+              className="text-white"
             >
               {formProductContent.submit_btn}
             </Button>
@@ -75,6 +76,7 @@ const UpdateProductForm = () => {
               variant="ghost"
               aria-label="cancel-update-btn"
               onClick={onCancel}
+              className="text-foreground-500"
             >
               {formProductContent.cancel_btn}
             </Button>

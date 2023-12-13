@@ -109,12 +109,11 @@ const Banner: FC<BannerProps> = ({
       <br />
       <section
         about="render-product-details"
-        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1 max-sm:space-y-3 max-sm:max-h-full"
+        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1 max-sm:space-y-3 max-sm:p-1 max-sm:max-h-full"
       >
         {shouldRenderCardMobileSize &&
-          products.map((product, prdIdx) => (
+          products.map((product) => (
             <CardProductMobileSize
-              order={prdIdx + 1}
               onRemove={onRemove}
               onUpdate={onUpdate}
               key={product.id}

@@ -1,8 +1,9 @@
 import type { Times } from "@/types";
 
-export const renderSnowProperties = (times: Times) => {
+export const renderSnowProperties = (times: Times, isMobile?: boolean) => {
   if (times.isMorning) return { snowflakeCount: 50, color: "white" };
-  if (times.isAfternoon) return { snowflakeCount: 100, color: "#dee4fd" };
+  if (times.isAfternoon)
+    return { snowflakeCount: isMobile ? 20 : 100, color: "#dee4fd" };
 
-  return { snowflakeCount: 200, color: "white" };
+  return { snowflakeCount: isMobile ? 20 : 150, color: "white" };
 };

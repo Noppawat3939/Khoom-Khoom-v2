@@ -7,6 +7,4 @@ export type CardProductProps = {
   onSelectedIdChange?: (selectedId: string) => void;
 } & Product;
 
-export type CardProductMobileSizeProps = CardProductProps & {
-  order: number;
-};
+export type CardProductMobileSizeProps = CardProductProps;

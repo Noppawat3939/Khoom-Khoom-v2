@@ -33,8 +33,14 @@ const CardProduct: FC<CardProductProps> = ({
     <Card
       shadow="sm"
       className={`${
-        isSelected ? "border-green-400" : "border-transparent"
-      } border p-2 min-h-[220px] max-sm:min-h-[260px] z-0`}
+        isSelected && theme.light
+          ? "ring-green-400"
+          : isSelected && theme.dark
+          ? "ring-yellow-400"
+          : "ring-transparent"
+      } ${
+        theme.dark ? "ring-[4px]" : "ring-[2px]"
+      } p-2 min-h-[220px] max-sm:min-h-[260px] z-0`}
       onDoubleClick={() => onRemove?.(id)}
       isPressable
       onClick={() => onSelectedIdChange?.(id)}
@@ -65,8 +71,10 @@ const CardProduct: FC<CardProductProps> = ({
             <span className="flex items-center" aria-label="product-name">
               <MdDriveFileRenameOutline
                 className={`${
-                  theme.dark
-                    ? " bg-foreground-100 text-foreground-400"
+                  theme.dark && !isSelected
+                    ? "bg-foreground-100 text-foreground-400"
+                    : theme.dark && isSelected
+                    ? "bg-yellow-100 text-yellow-500"
                     : "bg-green-100 text-green-500"
                 } w-6 h-6 mr-2 p-1 rounded-md`}
               />
@@ -89,8 +97,10 @@ const CardProduct: FC<CardProductProps> = ({
         <span className="flex items-center mt-auto space-x-1">
           <IoPricetagOutline
             className={`${
-              theme.dark
-                ? " bg-foreground-100 text-foreground-400"
+              theme.dark && !isSelected
+                ? "bg-foreground-100 text-foreground-400"
+                : theme.dark && isSelected
+                ? "bg-yellow-100 text-yellow-500"
                 : "bg-green-100 text-green-500"
             } w-6 h-6 mr-2 p-1 rounded-md`}
           />

@@ -1,13 +1,6 @@
 import React, { type FC } from "react";
 import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
-import {
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Chip,
-} from "@nextui-org/react";
+import { Button, Card, CardBody, CardFooter, Chip } from "@nextui-org/react";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import type { CardProductMobileSizeProps } from "./card-product-type";
@@ -19,7 +12,6 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   price,
   productName,
   size,
-  order,
   id,
   selected,
   onSelectedIdChange,
@@ -34,10 +26,13 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
 
   return (
     <Card
-      radius="sm"
       className={`${
-        isSelected ? "border-l-green-500" : "border-l-transparent"
-      } h-fit border-l-4 `}
+        isSelected && theme.dark
+          ? "ring-[#F5A524]"
+          : isSelected && theme.light
+          ? "ring-green-300"
+          : "ring-transparent"
+      } h-fit rounded-xl ring-[2px]`}
       isPressable
       onDoubleClick={() => onRemove(id)}
       onClick={() => onSelectedIdChange?.(id)}
@@ -48,14 +43,15 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
             aria-label="product-name"
             className="flex items-center space-x-2"
           >
-            <Badge
-              content={order}
-              className="text-white"
-              variant="shadow"
-              color={theme.light ? "success" : "danger"}
-            >
-              <BsFillBoxFill className="w-6 h-6 text-foreground-400" />
-            </Badge>
+            <BsFillBoxFill
+              className={`${
+                isSelected && theme.dark
+                  ? " text-[#F5A524]"
+                  : isSelected && theme.light
+                  ? "text-green-400"
+                  : "text-foreground-300"
+              } ${isSelected ? "drop-shadow-md" : "drop-shadow-none"} w-6 h-6 `}
+            />
             <span className="text-xl">{productName}</span>
           </span>
           <span className="flex space-x-2">
@@ -84,6 +80,7 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
         <Chip
           size="sm"
           variant="flat"
+          color={isSelected && theme.dark ? "warning" : "default"}
           className="text-foreground-500"
         >{`${content.size} - ${content.price}`}</Chip>
       </CardFooter>

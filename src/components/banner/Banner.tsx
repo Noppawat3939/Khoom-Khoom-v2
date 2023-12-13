@@ -26,9 +26,13 @@ const Banner: FC<BannerProps> = ({
 
   const { isPending } = useMutateStateCompareProduct();
 
-  const { products } = useProductsStore((store) => ({
-    products: store.products,
-  }));
+  const { products, selected, toggleSelectedId } = useProductsStore(
+    (store) => ({
+      products: store.products,
+      selected: store.selectedId,
+      toggleSelectedId: store.setSelectedId,
+    })
+  );
 
   const shouldRenderCardMobileSize = isMobile && !isEmpty(products);
   const shouldRenderCardPcOrTabletSize = !isMobile && !isEmpty(products);
@@ -83,9 +87,9 @@ const Banner: FC<BannerProps> = ({
             {isObject(textBtn) && textBtn.add}
           </Button>
 
-          <Badge content={products.length} color="danger">
+          <Badge content={selected.length} color="danger">
             <Button
-              isDisabled={isPending}
+              isDisabled={selected.length < 2 || isPending}
               onClick={onClick.compare}
               className={`text-lg ${
                 theme.dark
@@ -105,7 +109,7 @@ const Banner: FC<BannerProps> = ({
       <br />
       <section
         about="render-product-details"
-        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1 max-sm:gap-2 max-sm:max-h-full"
+        className="gap-6 max-md:gap-4 min-w-[80%] max-md:max-h-[55%] justify-center max-sm:min-w-[95%] grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:overflow-y-auto max-sm:grid-cols-1 max-sm:space-y-3 max-sm:max-h-full"
       >
         {shouldRenderCardMobileSize &&
           products.map((product, prdIdx) => (
@@ -115,6 +119,8 @@ const Banner: FC<BannerProps> = ({
               onUpdate={onUpdate}
               key={product.id}
               {...product}
+              selected={selected}
+              onSelectedIdChange={toggleSelectedId}
             />
           ))}
 
@@ -125,6 +131,8 @@ const Banner: FC<BannerProps> = ({
               key={product.id}
               onRemove={onRemove}
               onUpdate={onUpdate}
+              selected={selected}
+              onSelectedIdChange={toggleSelectedId}
             />
           ))}
       </section>

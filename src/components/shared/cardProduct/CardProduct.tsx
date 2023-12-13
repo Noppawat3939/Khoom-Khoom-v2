@@ -18,6 +18,8 @@ const CardProduct: FC<CardProductProps> = ({
   onRemove,
   onUpdate,
   id,
+  selected,
+  onSelectedIdChange,
 }) => {
   const {
     state: { theme },
@@ -25,16 +27,21 @@ const CardProduct: FC<CardProductProps> = ({
 
   const { content } = useRenderContentCardProduct({ size, price });
 
+  const isSelected = selected.includes(id);
+
   return (
     <Card
       shadow="sm"
-      className="p-2 min-h-[220px] max-sm:min-h-[260px] z-0"
+      className={`${
+        isSelected ? "border-green-400" : "border-transparent"
+      } border p-2 min-h-[220px] max-sm:min-h-[260px] z-0`}
       onDoubleClick={() => onRemove?.(id)}
       isPressable
+      onClick={() => onSelectedIdChange?.(id)}
     >
       <CardBody className="p-0">
         <div className="position">
-          <div className="w-full overflow-hidden bg-foreground-100 h-[180px] flex justify-center rounded-md items-center">
+          <div className="w-full overflow-hidden transition-all duration-250 bg-foreground-100 hover:bg-foreground-200 h-[180px] flex justify-center rounded-md items-center">
             <Image
               alt="default-product-image"
               loading="lazy"

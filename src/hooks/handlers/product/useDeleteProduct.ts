@@ -18,10 +18,13 @@ const useDeleteProduct = () => {
 
   const removeParam = params as RemoveProductParam;
 
-  const { products, removedProduct } = useProductsStore((store) => ({
-    products: store.products,
-    removedProduct: store.removedProduct,
-  }));
+  const { products, removedProduct, setSelectedId, selectedId } =
+    useProductsStore((store) => ({
+      products: store.products,
+      removedProduct: store.removedProduct,
+      setSelectedId: store.setSelectedId,
+      selectedId: store.selectedId,
+    }));
 
   const { data: content } = useGetContents();
 
@@ -38,8 +41,14 @@ const useDeleteProduct = () => {
   };
 
   const handleRemovedProduct = () => {
+    const _removeId = _string(removeParam?.removeId);
+
+    if (selectedId.includes(_removeId)) {
+      setSelectedId(_removeId);
+    }
+
     startTransition(() => {
-      removedProduct(_string(removeParam?.removeId));
+      removedProduct(_removeId);
       handleCloseModal();
     });
   };

@@ -25,10 +25,13 @@ const useUpdateProduct = () => {
     onCloseModal: store.onClose,
   }));
 
-  const { products, updatedProduct } = useProductsStore((store) => ({
-    products: store.products,
-    updatedProduct: store.updatedProduct,
-  }));
+  const { products, updatedProduct, selectedId, setSelectedId } =
+    useProductsStore((store) => ({
+      products: store.products,
+      updatedProduct: store.updatedProduct,
+      selectedId: store.selectedId,
+      setSelectedId: store.setSelectedId,
+    }));
 
   const updateParam = params as { updateId: string } | null;
 
@@ -61,6 +64,10 @@ const useUpdateProduct = () => {
     const id = _string(updateParam?.updateId);
 
     const updateProduct = { ...updateProductValues, id };
+
+    if (!selectedId.includes(id)) {
+      setSelectedId(id);
+    }
 
     updatedProduct(updateProduct, id);
     resetUpdateFormState();

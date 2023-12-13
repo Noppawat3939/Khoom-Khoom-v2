@@ -21,6 +21,8 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   size,
   order,
   id,
+  selected,
+  onSelectedIdChange,
 }) => {
   const {
     state: { theme },
@@ -28,12 +30,17 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
 
   const { content } = useRenderContentCardProduct({ size, price });
 
+  const isSelected = selected.includes(id);
+
   return (
     <Card
       radius="sm"
-      className="h-fit"
+      className={`${
+        isSelected ? "border-l-green-500" : "border-l-transparent"
+      } h-fit border-l-4 `}
       isPressable
       onDoubleClick={() => onRemove(id)}
+      onClick={() => onSelectedIdChange?.(id)}
     >
       <CardBody className="pb-0">
         <div className="flex justify-between items-center">

@@ -15,14 +15,14 @@ import { Button } from "@nextui-org/react";
 
 const MainContainer = () => {
   const {
-    state: { locale, localeLabel },
+    state: { localeLabel },
     action: { onLocaleChange },
   } = useHandleLocale();
 
   const {
     state: { bannerProps, isFetched },
     action: { handleSetValue, handleOpenDeleteModal, handleOpenUpdateProduct },
-  } = useHandleBanner(locale);
+  } = useHandleBanner();
 
   return (
     <Container className="relative">

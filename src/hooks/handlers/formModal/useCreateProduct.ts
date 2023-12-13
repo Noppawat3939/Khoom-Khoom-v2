@@ -18,10 +18,14 @@ const useCreateProduct = () => {
     onCloseModal: store.onClose,
   }));
 
-  const { products, addedProduct } = useProductsStore((store) => ({
-    products: store.products,
-    addedProduct: store.addedProduct,
-  }));
+  const { products, addedProduct, productId, setProductId } = useProductsStore(
+    (store) => ({
+      products: store.products,
+      addedProduct: store.addedProduct,
+      productId: store.selectedId,
+      setProductId: store.setSelectedId,
+    })
+  );
 
   const [createProductValues, setCreateProductValues] =
     useState<CreateProductValues>(createProductForm);
@@ -47,6 +51,9 @@ const useCreateProduct = () => {
     const newProduct = { ...createProductValues, id: uuid() };
 
     addedProduct([...products, newProduct]);
+
+    const newSelected = newProduct.id;
+    setProductId(newSelected);
     setTimeout(onResetCreateProductValues, 300);
   };
 

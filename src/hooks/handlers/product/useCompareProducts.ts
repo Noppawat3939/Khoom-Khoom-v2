@@ -1,11 +1,10 @@
 import { EMPTY_STRING } from "@/constants";
-import { useGetContentByLocale } from "@/hooks";
-import { useLocaleStore, useModalStore } from "@/stores";
+import { useGetContents } from "@/hooks";
+import { useModalStore } from "@/stores";
 import { _string } from "@/utils";
 
 const useCompareProducts = () => {
-  const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
-  const { data: content } = useGetContentByLocale(locale);
+  const { data: content } = useGetContents();
 
   const { open, comparedData, resetComparedData, onClose } = useModalStore(
     (store) => ({

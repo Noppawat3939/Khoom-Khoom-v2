@@ -8,9 +8,10 @@ import {
   CardFooter,
   Chip,
 } from "@nextui-org/react";
-import { FaRegEdit, FaShoppingCart } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import type { CardProductMobileSizeProps } from "./card-product-type";
+import { BsFillBoxFill } from "react-icons/bs";
 
 const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   onRemove,
@@ -46,7 +47,7 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
               variant="shadow"
               color={theme.light ? "success" : "danger"}
             >
-              <FaShoppingCart className="w-6 h-6 text-foreground-400" />
+              <BsFillBoxFill className="w-6 h-6 text-foreground-400" />
             </Badge>
             <span className="text-xl">{productName}</span>
           </span>

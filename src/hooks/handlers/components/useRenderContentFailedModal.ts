@@ -1,10 +1,8 @@
-import { useGetContentByLocale } from "@/hooks";
-import { useLocaleStore } from "@/stores";
+import { useGetContents } from "@/hooks";
 import { _string } from "@/utils";
 
 const useRenderContentFailedModal = () => {
-  const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
-  const { data: content } = useGetContentByLocale(locale);
+  const { data: content } = useGetContents();
 
   const failedContent = {
     title: _string(content?.failed_modal.title),

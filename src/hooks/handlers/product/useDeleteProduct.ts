@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useGetContentByLocale } from "@/hooks";
-import { useLocaleStore, useModalStore, useProductsStore } from "@/stores";
+
+import { useGetContents } from "@/hooks";
+import { useModalStore, useProductsStore } from "@/stores";
 import type { RemoveProductParam } from "@/types";
 import { _string } from "@/utils";
 import { useCallback, useTransition } from "react";
@@ -22,8 +23,7 @@ const useDeleteProduct = () => {
     removedProduct: store.removedProduct,
   }));
 
-  const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
-  const { data: content } = useGetContentByLocale(locale);
+  const { data: content } = useGetContents();
 
   const handleCloseModal = useCallback(() => onClose(), []);
 

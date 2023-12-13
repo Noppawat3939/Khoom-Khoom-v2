@@ -33,26 +33,29 @@ const CardProduct: FC<CardProductProps> = ({
       isPressable
     >
       <CardBody className="p-0">
-        <div className="position ">
-          <Image
-            alt="default-product-image"
-            loading="lazy"
-            className="shadow-none border-none object-cover max-h-[180px] max-md:h-[140px] max-sm:h-[160px]"
-            src={productImage}
-          />
+        <div className="position">
+          <div className="w-full overflow-hidden bg-foreground-100 h-[180px] flex justify-center rounded-md items-center">
+            <Image
+              alt="default-product-image"
+              loading="lazy"
+              className="shadow-none border-none max-h-[180px] max-w-[80px] max-md:h-[140px] max-sm:h-[160px] duration-250 transition-all hover:scale-125"
+              src={productImage}
+            />
+          </div>
           <Button
             isIconOnly
             onClick={() => onUpdate(id)}
-            variant="faded"
+            variant="ghost"
+            size="sm"
             aria-label="update-product-btn"
             className="absolute rounded-lg top-1 right-1 z-10 shadow-sm"
           >
-            <FaRegEdit className="w-7 h-7 p-1 text-foreground-500" />
+            <FaRegEdit className="w-6 h-6 p-1 text-foreground-400" />
           </Button>
         </div>
         <div className="flex items-center justify-between">
-          <CardHeader className="px-0 w-fit text-2xl flex items-center max-md:text-xl">
-            <span className="flex items-center">
+          <CardHeader className="px-0 w-fit text-xl flex items-center max-md:text-lg">
+            <span className="flex items-center" aria-label="product-name">
               <MdDriveFileRenameOutline
                 className={`${
                   theme.dark
@@ -62,7 +65,7 @@ const CardProduct: FC<CardProductProps> = ({
               />
               {productName}
             </span>
-            <Chip size="sm" className="ml-2 text-foreground-500" variant="flat">
+            <Chip size="sm" className="ml-1 text-foreground-500" variant="flat">
               {content.size}
             </Chip>
           </CardHeader>
@@ -84,7 +87,7 @@ const CardProduct: FC<CardProductProps> = ({
                 : "bg-green-100 text-green-500"
             } w-6 h-6 mr-2 p-1 rounded-md`}
           />
-          <h2 aria-label="price" className="text-lg font-medium">
+          <h2 aria-label="price" className="text-sm font-medium">
             {content.price}
           </h2>
         </span>

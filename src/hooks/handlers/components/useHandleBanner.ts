@@ -2,7 +2,7 @@
 
 import { EMPTY_STRING, ZERO } from "@/constants";
 import {
-  useGetContentByLocale,
+  useGetContents,
   useHandleFormModal,
   useMutateCompareProduct,
 } from "@/hooks";
@@ -38,7 +38,8 @@ const useHandleBanner = (locale: Locale) => {
     state: { openModal },
   } = useHandleFormModal();
 
-  const { data: content, isFetched } = useGetContentByLocale(locale);
+  const { data: content, isFetched } = useGetContents();
+
   const [values, setValues] = useState(0);
 
   const handleBannerProps = () => {

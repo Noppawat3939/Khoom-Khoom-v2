@@ -1,6 +1,6 @@
 import { ACTIVE_MODAL, VARIABLE_CONTENT } from "@/constants";
-import { useGetContentByLocale } from "@/hooks";
-import { useLocaleStore, useModalStore, useProductsStore } from "@/stores";
+import { useGetContents } from "@/hooks";
+import { useModalStore, useProductsStore } from "@/stores";
 import type { FormModal, UpdateProductParam } from "@/types";
 import { _string } from "@/utils";
 import { eq } from "lodash";
@@ -13,8 +13,7 @@ type UseRenderContentProductForm = Exclude<
 const useRenderContentProductForm = (
   activeForm: UseRenderContentProductForm
 ) => {
-  const { locale } = useLocaleStore((store) => ({ locale: store.locale }));
-  const { data: content } = useGetContentByLocale(locale);
+  const { data: content } = useGetContents();
 
   const { params } = useModalStore((store) => ({ params: store.params }));
   const { products } = useProductsStore((store) => ({

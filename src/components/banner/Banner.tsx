@@ -54,7 +54,7 @@ const Banner: FC<BannerProps> = ({
       >
         {title}
       </h1>
-      <p className="text-2xl max-md:text-xl text-foreground-400">
+      <p className="text-2xl max-md:text-xl max-sm:text-lg max-sm:mt-3 text-foreground-400">
         {description}
       </p>
 

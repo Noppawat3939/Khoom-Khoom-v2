@@ -1,9 +1,9 @@
-const GET_CONTENT = "/locale";
 const COMPARE_PRODUCTS = "/compare";
+const GET_LOCALE = "/public/locale";
 
 export const PRE_FIX_PATH = "/api";
 
 export const URL = {
-  GET_CONTENT,
   COMPARE_PRODUCTS,
+  GET_LOCALE,
 } as const;

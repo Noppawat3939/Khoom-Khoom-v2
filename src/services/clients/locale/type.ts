@@ -1,3 +1,5 @@
-import type { ContentByLocale } from "@/types";
+import type { ContentByLocale, Locale } from "@/types";
 
-export type GetContentResponse = { data: ContentByLocale };
+export type GetContentsResponse = {
+  data: Record<Locale, ContentByLocale>;
+};

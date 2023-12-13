@@ -1,1 +1,1 @@
-export { default as useGetContentByLocale } from "./useGetContentByLocale";
+export { default as useGetContents } from "./useGetContents";

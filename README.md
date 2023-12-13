@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Khoom Khoom - Product Price Comparison
 
-## Getting Started
+Khoom Khoom is a web application built to compare product prices and help users find the cheapest options available. This project is implemented using Next.js with TypeScript, Zustand for state management, and Tanstack Query for efficient data fetching.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Product Details Creation:** Users can add and create detailed information about products, including their name, description, images, and prices.
+- **Editing Product Details:** Capability to modify and edit existing product details as required.
+- **Price Comparison:** Allows users to compare the prices of different products to identify the most cost-effective option available.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Check out the live demo of Khoom Khoom [here](https://khoom-khoom.vercel.app/).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
 
-## Learn More
+- **Next.js (TypeScript):** Next.js provides a powerful and flexible framework for building React applications, while TypeScript ensures strong typing and code consistency.
+- **Zustand:** Zustand is utilized for state management, offering a minimalistic yet powerful store for managing application state.
+- **Tanstack Query:** Tanstack Query facilitates efficient data fetching by providing tools for managing and caching asynchronous data.
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this project locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone the repository: `git clone https://github.com/your-username/khoom-khoom.git`
+2. Navigate to the project directory: `cd khoom-khoom`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm run dev`
+5. Open your browser and visit: `http://localhost:3000`

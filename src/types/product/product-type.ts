@@ -7,7 +7,15 @@ export type MapProductPricePerAmount = {
   pricePerAmount: number;
 }[];
 
-export type CompareProducts = { data: Product[] | null; isEqual: boolean };
+export type MapProductAmountPerPrice = {
+  amountPerPrice: number;
+}[];
+
+export type CompareProducts = {
+  data: Product[] | null;
+  isEqual: boolean;
+  cheaperPercent?: number;
+};
 
 export type RemoveProductParam = { removeId: string } | null;
 export type UpdateProductParam = { updateId: string } | null;

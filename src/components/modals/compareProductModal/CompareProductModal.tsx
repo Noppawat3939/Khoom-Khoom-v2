@@ -40,6 +40,7 @@ const CompareProductModal = () => {
             className="mt-2 object-cover w-[100px] h-[100px] max-md:w-[80px] max-md:h-[80px] mx-auto"
             src={productCount.hasEqual ? EqualImage : ThumbUpImage}
           />
+
           {productCount.hasOne &&
             data.data?.map((data) => (
               <ModalHeader

@@ -1,3 +1,4 @@
+import { ZERO } from "@/constants";
 import type { MapProductPricePerAmount, Product } from "@/types";
 import {
   mapPricePerAmount,
@@ -5,9 +6,11 @@ import {
   findMinPricePerAmount,
   findProductById,
   groupProductById,
+  mapAmountPerPrice,
+  calculateCheaperPercent,
 } from "@/utils";
 import { HttpStatusCode } from "axios";
-import { isArray, isUndefined } from "lodash";
+import { isArray, isEmpty, isUndefined } from "lodash";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -29,6 +32,11 @@ export const POST = async (req: Request) => {
       });
 
     const pricePerAmountOfProduct = mapPricePerAmount(products);
+    const amountPerPrice = mapAmountPerPrice(products);
+
+    const cheaperPercent = !isEmpty(amountPerPrice)
+      ? calculateCheaperPercent(amountPerPrice)
+      : ZERO;
 
     const minAmountPerPrice = findMinPricePerAmount(
       pricePerAmountOfProduct as MapProductPricePerAmount
@@ -50,6 +58,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json({
       data: foundProduct,
       isEqual,
+      cheaperPercent,
     });
   } catch (error) {
     return NextResponse.json(

@@ -2,7 +2,11 @@ import { Drawer } from "@/components";
 import type { UpdateProduct } from "@/types";
 import { Button, Input } from "@nextui-org/react";
 import React from "react";
-import { useRenderContentProductForm, useUpdateProduct } from "@/hooks";
+import {
+  useAppTheme,
+  useRenderContentProductForm,
+  useUpdateProduct,
+} from "@/hooks";
 import { eq } from "lodash";
 import { ACTIVE_MODAL } from "@/constants";
 import { useModalStore } from "@/stores";
@@ -11,6 +15,10 @@ const UpdateProductForm = () => {
   const {
     state: { formProductContent },
   } = useRenderContentProductForm(ACTIVE_MODAL.UPDATE_PRODUCT);
+
+  const {
+    state: { theme },
+  } = useAppTheme();
 
   const {
     state: { formValues, updateProductValues, isDisabledSubmit },
@@ -67,7 +75,9 @@ const UpdateProductForm = () => {
               isDisabled={isDisabledSubmit}
               size="lg"
               aria-label="update-product-btn"
-              className="text-white"
+              className={`text-white ${
+                theme.dark ? "bg-[#2b5988]" : "bg-[#1B9C85]"
+              }`}
             >
               {formProductContent.submit_btn}
             </Button>

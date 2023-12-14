@@ -9,7 +9,7 @@ const kanit = Kanit({
 });
 
 export const metadata: Metadata = {
-  title: "Khoom Khoomm | Find the best product price for you.",
+  title: "Khoom Khoom | Find the best product price for you.",
   description: "Compare the value of the products.",
 };
 

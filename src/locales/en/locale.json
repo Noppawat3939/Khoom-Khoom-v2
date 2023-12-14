@@ -34,7 +34,7 @@
         "cancel_product_btn": "Cancel"
     },
     "compare_product": {
-        "cheapest_one_product_title": "has the cheapest price",
+        "cheapest_one_product_title": "It is {{}}% cheaper.",
         "cheapest_one_product_size": "size {{}}",
         "equal_products_title": "have the same price.",
         "close_btn": "Close"

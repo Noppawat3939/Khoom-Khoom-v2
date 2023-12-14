@@ -1,4 +1,4 @@
-import { EMPTY_STRING } from "@/constants";
+import { EMPTY_STRING, VARIABLE_CONTENT } from "@/constants";
 import { useGetContents } from "@/hooks";
 import { useModalStore } from "@/stores";
 import { _string } from "@/utils";
@@ -34,7 +34,9 @@ const useCompareProducts = () => {
     // has one product is cheapest or has more than one product is cheapest
     if (hasOne || hasMoreThanOne)
       return {
-        title: _string(content?.compare_product.cheapest_one_product_title),
+        title: _string(
+          content?.compare_product.cheapest_one_product_title
+        ).replaceAll(VARIABLE_CONTENT, `${comparedData?.cheaperPercent || 0}`),
         size: hasOne
           ? _string(content?.compare_product.cheapest_one_product_size)
           : EMPTY_STRING,

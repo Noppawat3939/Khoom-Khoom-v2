@@ -5,5 +5,5 @@ export const renderSnowProperties = (times: Times, isMobile?: boolean) => {
   if (times.isAfternoon)
     return { snowflakeCount: isMobile ? 20 : 100, color: "#dee4fd" };
 
-  return { snowflakeCount: isMobile ? 20 : 150, color: "white" };
+  return { snowflakeCount: isMobile ? 8 : 150, color: "white" };
 };

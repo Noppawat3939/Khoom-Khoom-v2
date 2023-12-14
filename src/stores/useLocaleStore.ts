@@ -7,6 +7,6 @@ type UseLocaleStore = {
 };
 
 export const useLocaleStore = create<UseLocaleStore>((set) => ({
-  locale: "en",
+  locale: "th",
   setLocale: (locale) => set(() => ({ locale })),
 }));

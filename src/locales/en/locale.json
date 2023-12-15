@@ -13,9 +13,9 @@
         "product_name_placeholder": "Chocolate",
         "product_size_label": "Size or Amount",
         "product_size_placeholder": "100 (number only)",
-        "product_quantity_label": "Quantity",
+        "product_quantity_label": "Quantity (per 1 piece)",
         "product_quantity_placeholder": "1 (number only)",
-        "product_price_label": "Price",
+        "product_price_label": "Price (per 1 piece)",
         "product_price_placeholder": "45 (number only)",
         "submit_product_btn": "Create product",
         "cancel_product_btn": "Cancel"
@@ -26,9 +26,9 @@
         "product_name_placeholder": "Chocolate",
         "product_size_label": "Size or Amount",
         "product_size_placeholder": "100 (number only)",
-        "product_quantity_label": "Quantity",
+        "product_quantity_label": "Quantity (per 1 piece)",
         "product_quantity_placeholder": "1 (number only)",
-        "product_price_label": "Price",
+        "product_price_label": "Price (per 1 piece)",
         "product_price_placeholder": "45 (number only)",
         "submit_product_btn": "Update product",
         "cancel_product_btn": "Cancel"

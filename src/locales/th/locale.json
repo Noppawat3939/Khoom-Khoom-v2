@@ -13,9 +13,9 @@
         "product_name_placeholder": "ช็อคโกแลต, คิทแคท",
         "product_size_label": "ปริมาณ/น้ำหนัก",
         "product_size_placeholder": "100 (กรอกเฉพาะตัวเลข)",
-        "product_quantity_label": "จำนวน",
+        "product_quantity_label": "จำนวน (ชิ้น)",
         "product_quantity_placeholder": "1 (กรอกเฉพาะตัวเลข)",
-        "product_price_label": "ราคาสินค้า",
+        "product_price_label": "ราคาสินค้า (ต่อ 1 ชิ้น)",
         "product_price_placeholder": "45 (กรอกเฉพาะตัวเลข)",
         "submit_product_btn": "สร้างรายการสินค้า",
         "cancel_product_btn": "ยกเลิกรายการ"
@@ -26,9 +26,9 @@
         "product_name_placeholder": "ช็อคโกแลต, คิทแคท",
         "product_size_label": "ปริมาณ/น้ำหนัก",
         "product_size_placeholder": "100 (กรอกเฉพาะตัวเลข)",
-        "product_quantity_label": "จำนวน",
+        "product_quantity_label": "จำนวน (ชิ้น)",
         "product_quantity_placeholder": "1 (กรอกเฉพาะตัวเลข)",
-        "product_price_label": "ราคาสินค้า",
+        "product_price_label": "ราคาสินค้า (ต่อ 1 ชิ้น)",
         "product_price_placeholder": "45 (กรอกเฉพาะตัวเลข)",
         "submit_product_btn": "ยืนยันแก้ไขรายการ",
         "cancel_product_btn": "ยกเลิกการแก้ไข"

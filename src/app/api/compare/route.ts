@@ -31,7 +31,7 @@ export const POST = async (req: Request) => {
 
     const pricePerAmountOfProduct = mapPricePerAmount(products);
 
-    const productCheapest = findProductCheapest(products);
+    const { cheapestPercent } = findProductCheapest(products);
 
     const minAmountPerPrice = findMinPricePerAmount(
       pricePerAmountOfProduct as MapProductPricePerAmount
@@ -53,7 +53,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json({
       data: foundProduct,
       isEqual,
-      cheaperPercent: productCheapest.cheapestPercent,
+      cheaperPercent: Math.floor(cheapestPercent),
     });
   } catch (error) {
     return NextResponse.json(

@@ -36,23 +36,6 @@ export const mapPricePerAmount = (products: Product[]) => {
   return result;
 };
 
-export const mapAmountPerPrice = (products: Product[]) => {
-  const result = products.map((product) => {
-    const priceNum = Number(product.price);
-    const amountNum = Number(product.size);
-
-    if (!isNaN(priceNum) && !isNaN(amountNum) && amountNum !== 0) {
-      return {
-        amountPerPrice: Number((amountNum / priceNum).toFixed(3)),
-      };
-    }
-
-    return { amountPerPrice: 0 };
-  });
-
-  return result;
-};
-
 export const findMinPricePerAmount = (
   mapProducts: MapProductPricePerAmount
 ) => {
@@ -90,52 +73,33 @@ export const calculateMinimumAmountPerPrice = (
   });
 };
 
-export const calculateMaximumAmountPerPrice = (
-  amountPerPriceProducts: MapProductAmountPerPrice
-) => {
-  return amountPerPriceProducts.reduce((minProduct, curProduct) => {
-    if (curProduct.amountPerPrice > minProduct.amountPerPrice) {
-      return minProduct;
-    } else {
-      return curProduct;
+export const findProductCheapest = (products: Product[]) => {
+  const parsedProducts = products.map((product) => ({
+    ...product,
+    price: parseFloat(product.price),
+    size: parseFloat(product.size),
+  }));
+
+  let cheapestPercent = ZERO;
+  let cheapestProduct = null;
+
+  parsedProducts.forEach((product) => {
+    const pricePerUnit = product.price / product.size;
+
+    const percentDifference =
+      (Math.abs(
+        pricePerUnit -
+          parsedProducts[FIRST_INDEX].price / parsedProducts[FIRST_INDEX].size
+      ) /
+        (parsedProducts[FIRST_INDEX].price /
+          parsedProducts[FIRST_INDEX].size)) *
+      100;
+
+    if (cheapestPercent === ZERO || percentDifference < cheapestPercent) {
+      cheapestPercent = percentDifference;
+      cheapestProduct = product.productName;
     }
   });
-};
 
-export const calculateCheaperPercent = (
-  amountPerPriceProducts: MapProductAmountPerPrice
-) => {
-  //@ts-ignore
-  const percent = amountPerPriceProducts.reduce((acc, cur) => {
-    if (cur.amountPerPrice > acc.amountPerPrice) {
-      return Math.floor(
-        ((cur.amountPerPrice - acc.amountPerPrice) / cur.amountPerPrice) * 100
-      );
-    }
-
-    if (cur.amountPerPrice < acc.amountPerPrice) {
-      return Math.floor(
-        ((acc.amountPerPrice - cur.amountPerPrice) / acc.amountPerPrice) * 100
-      );
-    }
-
-    const minAmountPerPrice = calculateMinimumAmountPerPrice(
-      amountPerPriceProducts
-    );
-    const maxAmountPerPrice = calculateMaximumAmountPerPrice(
-      amountPerPriceProducts
-    );
-
-    if (minAmountPerPrice.amountPerPrice > maxAmountPerPrice.amountPerPrice) {
-      return Math.floor(
-        ((minAmountPerPrice.amountPerPrice - maxAmountPerPrice.amountPerPrice) /
-          minAmountPerPrice.amountPerPrice) *
-          100
-      );
-    }
-
-    return 0;
-  });
-
-  return percent as unknown as number;
+  return { cheapestPercent, cheapestProduct };
 };

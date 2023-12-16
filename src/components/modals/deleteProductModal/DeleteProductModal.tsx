@@ -26,7 +26,6 @@ const DeleteProductModal = () => {
       isOpen={eq(open, ACTIVE_MODAL.DELETE_PRODUCT)}
       isKeyboardDismissDisabled
       onClose={handleCloseModal}
-      isDismissable={false}
     >
       <ModalContent className="p-3">
         <ModalBody>

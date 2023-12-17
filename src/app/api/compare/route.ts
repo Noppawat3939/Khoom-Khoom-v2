@@ -2,9 +2,7 @@ import type { MapProductPricePerAmount, Product } from "@/types";
 import {
   mapPricePerAmount,
   checkEqualProductValues,
-  findMinPricePerAmount,
   findProductById,
-  groupProductById,
   findProductCheapest,
 } from "@/utils";
 import { HttpStatusCode } from "axios";
@@ -29,20 +27,10 @@ export const POST = async (req: Request) => {
         data: products,
       });
 
-    const pricePerAmountOfProduct = mapPricePerAmount(products);
+    const { cheapestPercent, cheapestProductId } =
+      findProductCheapest(products);
 
-    const { cheapestPercent } = findProductCheapest(products);
-
-    const minAmountPerPrice = findMinPricePerAmount(
-      pricePerAmountOfProduct as MapProductPricePerAmount
-    );
-
-    const groupedId = groupProductById(
-      pricePerAmountOfProduct as MapProductPricePerAmount,
-      minAmountPerPrice
-    );
-
-    const foundProduct = findProductById(products, groupedId);
+    const foundProduct = findProductById(products, cheapestProductId);
 
     if (isUndefined(foundProduct))
       return NextResponse.json({

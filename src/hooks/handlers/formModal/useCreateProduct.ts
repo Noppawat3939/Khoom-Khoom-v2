@@ -18,11 +18,10 @@ const useCreateProduct = () => {
     onCloseModal: store.onClose,
   }));
 
-  const { products, addedProduct, productId, setProductId } = useProductsStore(
+  const { products, addedProduct, setProductId } = useProductsStore(
     (store) => ({
       products: store.products,
       addedProduct: store.addedProduct,
-      productId: store.selectedId,
       setProductId: store.setSelectedId,
     })
   );

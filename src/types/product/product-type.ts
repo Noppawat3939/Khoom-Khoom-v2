@@ -7,10 +7,6 @@ export type MapProductPricePerAmount = {
   pricePerAmount: number;
 }[];
 
-export type MapProductAmountPerPrice = {
-  amountPerPrice: number;
-}[];
-
 export type CompareProducts = {
   data: Product[] | null;
   isEqual: boolean;

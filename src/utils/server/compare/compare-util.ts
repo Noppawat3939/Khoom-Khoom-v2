@@ -1,23 +1,39 @@
-import { FIRST_INDEX, ZERO } from "@/constants";
-import type {
-  MapProductAmountPerPrice,
-  MapProductPricePerAmount,
-  Product,
-} from "@/types";
-import { groupBy, isArray } from "lodash";
+import { EMPTY_STRING, FIRST_INDEX, ZERO } from "@/constants";
+import type { MapProductPricePerAmount, Product } from "@/types";
+import { groupBy, isArray, uniq } from "lodash";
+
+const cleanUpNumberValues = (products: Product[]) => {
+  const minQuantity = 1;
+
+  const cleaned = products.map((product) => ({
+    ...product,
+    price: Number(product.price),
+    size: Number(product.size),
+    quantity: Number(product.quantity) || minQuantity,
+  }));
+
+  return cleaned;
+};
+
+const mapPricePerUnit = (products: Product[]) => {
+  const cleanedProducts = cleanUpNumberValues(products);
+
+  const productsPricePerUnit = cleanedProducts.map((product) => {
+    const pricePerUnit = product.price / (product.size * product.quantity);
+
+    return pricePerUnit;
+  });
+
+  return productsPricePerUnit;
+};
 
 export const checkEqualProductValues = (products: Product[]) => {
-  //used first index to target for check every elements
-  const firstProductIdx = products.at(FIRST_INDEX);
-  const targetPricePerSize = firstProductIdx
-    ? +firstProductIdx?.price / +firstProductIdx?.size
-    : ZERO;
+  const hasOneValue = 1;
 
-  const isEqual = products.every(
-    (product) => +product.price / +product.size === targetPricePerSize
-  );
+  const productsPricePerUnit = mapPricePerUnit(products);
+  const isEqualValue = uniq(productsPricePerUnit).length === hasOneValue;
 
-  return isEqual;
+  return isEqualValue;
 };
 
 export const mapPricePerAmount = (products: Product[]) => {
@@ -36,23 +52,6 @@ export const mapPricePerAmount = (products: Product[]) => {
   return result;
 };
 
-export const findMinPricePerAmount = (
-  mapProducts: MapProductPricePerAmount
-) => {
-  return Math.min(...mapProducts.map((product) => product.pricePerAmount));
-};
-
-export const groupProductById = (
-  pricePerAmountProducts: MapProductPricePerAmount,
-  minPrice: number
-) => {
-  const result = groupBy(pricePerAmountProducts, "pricePerAmount")[
-    minPrice
-  ].flatMap((item) => item.id ?? "0");
-
-  return result;
-};
-
 export const findProductById = (
   products: Product[],
   findId: string | string[]
@@ -61,30 +60,15 @@ export const findProductById = (
     ? products.filter((product) => findId.includes(product.id))
     : products.find((product) => product.id === findId);
 
-export const calculateMinimumAmountPerPrice = (
-  amountPerPriceProducts: MapProductAmountPerPrice
-) => {
-  return amountPerPriceProducts.reduce((minProduct, curProduct) => {
-    if (curProduct.amountPerPrice < minProduct.amountPerPrice) {
-      return minProduct;
-    } else {
-      return curProduct;
-    }
-  });
-};
-
 export const findProductCheapest = (products: Product[]) => {
-  const parsedProducts = products.map((product) => ({
-    ...product,
-    price: parseFloat(product.price),
-    size: parseFloat(product.size),
-  }));
+  const parsedProducts = cleanUpNumberValues(products);
 
   let cheapestPercent = ZERO;
   let cheapestProduct = null;
+  let cheapestProductId = EMPTY_STRING;
 
   parsedProducts.forEach((product) => {
-    const pricePerUnit = product.price / product.size;
+    const pricePerUnit = product.price / (product.size * product.quantity);
 
     const percentDifference =
       (Math.abs(
@@ -98,8 +82,9 @@ export const findProductCheapest = (products: Product[]) => {
     if (cheapestPercent === ZERO || percentDifference < cheapestPercent) {
       cheapestPercent = percentDifference;
       cheapestProduct = product.productName;
+      cheapestProductId = product.id;
     }
   });
 
-  return { cheapestPercent, cheapestProduct };
+  return { cheapestPercent, cheapestProduct, cheapestProductId };
 };

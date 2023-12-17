@@ -42,7 +42,7 @@ const CompareProductModal = () => {
           />
 
           {productCount.hasOne &&
-            data.data?.map((data) => (
+            data?.map((data) => (
               <ModalHeader
                 key={data.id}
                 className="justify-center p-0 flex flex-col items-center text-2xl max-md:text-xl"
@@ -62,8 +62,8 @@ const CompareProductModal = () => {
               className="flex flex-col w-full item-center"
             >
               <div className="flex space-x-2 justify-center">
-                {data.data?.map((_data, dataIdx) => {
-                  const _separate = renderSeparate(data.data!, dataIdx);
+                {data?.map((_data, dataIdx) => {
+                  const _separate = renderSeparate(data!, dataIdx);
 
                   return (
                     <ModalHeader
@@ -87,8 +87,8 @@ const CompareProductModal = () => {
               className="flex flex-col w-full item-center"
             >
               <div className="flex space-x-2 justify-center">
-                {data.data?.map((_data, dataIdx) => {
-                  const _separate = renderSeparate(data.data!, dataIdx);
+                {data?.map((_data, dataIdx) => {
+                  const _separate = renderSeparate(data!, dataIdx);
 
                   return (
                     <ModalHeader

@@ -10,6 +10,7 @@ import Image from "next/image";
 
 import productImage from "@/assets/png/product.png";
 import type { CardProductProps } from "./card-product-type";
+import { isEmpty } from "lodash";
 
 const CardProduct: FC<CardProductProps> = ({
   price,
@@ -19,6 +20,7 @@ const CardProduct: FC<CardProductProps> = ({
   onUpdate,
   id,
   selected,
+  quantity,
   onSelectedIdChange,
 }) => {
   const {
@@ -54,6 +56,9 @@ const CardProduct: FC<CardProductProps> = ({
               className="shadow-none border-none max-h-[180px] max-w-[80px] max-md:h-[140px] max-sm:h-[160px] duration-250 transition-all hover:scale-125"
               src={productImage}
             />
+            <span className="absolute bottom-0 right-0 text-foreground-400">
+              {`x${isEmpty(quantity) ? 1 : Number(quantity)}`}
+            </span>
           </div>
           <Button
             isIconOnly

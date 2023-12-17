@@ -55,7 +55,7 @@ const useCompareProducts = () => {
     state: {
       open,
       productCount: { hasMoreThanOne, hasOne, hasEqual },
-      data: comparedData,
+      data: comparedData.data,
       content: mapContentCompareModal(),
     },
     action: { handleCloseModal },

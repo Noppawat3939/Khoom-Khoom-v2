@@ -1,11 +1,15 @@
-import { EMPTY_STRING, FIRST_INDEX, ZERO } from "@/constants";
-import type { MapProductPricePerAmount, Product } from "@/types";
-import { groupBy, isArray, uniq } from "lodash";
+import type {
+  Product,
+  ProductWithPricePerUnit,
+  CleanedProducts,
+} from "@/types";
+import { isArray, uniq } from "lodash";
+import { calPercentDiff } from "../shared";
 
 const cleanUpNumberValues = (products: Product[]) => {
   const minQuantity = 1;
 
-  const cleaned = products.map((product) => ({
+  const cleaned: CleanedProducts = products.map((product) => ({
     ...product,
     price: Number(product.price),
     size: Number(product.size),
@@ -18,11 +22,13 @@ const cleanUpNumberValues = (products: Product[]) => {
 const mapPricePerUnit = (products: Product[]) => {
   const cleanedProducts = cleanUpNumberValues(products);
 
-  const productsPricePerUnit = cleanedProducts.map((product) => {
-    const pricePerUnit = product.price / (product.size * product.quantity);
+  const productsPricePerUnit: ProductWithPricePerUnit[] = cleanedProducts.map(
+    (product) => {
+      const pricePerUnit = product.price / (product.size * product.quantity);
 
-    return pricePerUnit;
-  });
+      return { ...product, pricePerUnit: +pricePerUnit.toFixed(3) };
+    }
+  );
 
   return productsPricePerUnit;
 };
@@ -30,26 +36,12 @@ const mapPricePerUnit = (products: Product[]) => {
 export const checkEqualProductValues = (products: Product[]) => {
   const hasOneValue = 1;
 
-  const productsPricePerUnit = mapPricePerUnit(products);
+  const productsPricePerUnit = mapPricePerUnit(products).map(
+    (product) => product.pricePerUnit
+  );
   const isEqualValue = uniq(productsPricePerUnit).length === hasOneValue;
 
   return isEqualValue;
-};
-
-export const mapPricePerAmount = (products: Product[]) => {
-  const result = products.map((product) => {
-    const priceNum = Number(product.price);
-    const amountNum = Number(product.size);
-
-    if (!isNaN(priceNum) && !isNaN(amountNum) && amountNum !== 0) {
-      return {
-        pricePerAmount: Number((priceNum / amountNum).toFixed(3)),
-        id: product.id,
-      };
-    }
-  });
-
-  return result;
 };
 
 export const findProductById = (
@@ -60,31 +52,28 @@ export const findProductById = (
     ? products.filter((product) => findId.includes(product.id))
     : products.find((product) => product.id === findId);
 
+const getMinPricePerUnitProduct = (
+  productWithPricePerUnit: ProductWithPricePerUnit[]
+) =>
+  Math.min(...productWithPricePerUnit.map((product) => product.pricePerUnit));
+
+const getMaxPricePerUnitProduct = (
+  productWithPricePerUnit: ProductWithPricePerUnit[]
+) =>
+  Math.max(...productWithPricePerUnit.map((product) => product.pricePerUnit));
+
 export const findProductCheapest = (products: Product[]) => {
-  const parsedProducts = cleanUpNumberValues(products);
+  const minPricePerUnit = getMinPricePerUnitProduct(mapPricePerUnit(products));
+  const maxPricePerUnit = getMaxPricePerUnitProduct(mapPricePerUnit(products));
 
-  let cheapestPercent = ZERO;
-  let cheapestProduct = null;
-  let cheapestProductId = EMPTY_STRING;
+  const minProducts = mapPricePerUnit(products).filter(
+    (product) => product.pricePerUnit === minPricePerUnit
+  );
 
-  parsedProducts.forEach((product) => {
-    const pricePerUnit = product.price / (product.size * product.quantity);
+  const cheapestPercentage = calPercentDiff(maxPricePerUnit, minPricePerUnit);
 
-    const percentDifference =
-      (Math.abs(
-        pricePerUnit -
-          parsedProducts[FIRST_INDEX].price / parsedProducts[FIRST_INDEX].size
-      ) /
-        (parsedProducts[FIRST_INDEX].price /
-          parsedProducts[FIRST_INDEX].size)) *
-      100;
-
-    if (cheapestPercent === ZERO || percentDifference < cheapestPercent) {
-      cheapestPercent = percentDifference;
-      cheapestProduct = product.productName;
-      cheapestProductId = product.id;
-    }
-  });
-
-  return { cheapestPercent, cheapestProduct, cheapestProductId };
+  return {
+    cheapestPercent: cheapestPercentage,
+    cheapestProductId: minProducts.map((prd) => prd.id),
+  };
 };

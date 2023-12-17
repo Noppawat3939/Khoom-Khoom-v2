@@ -1,6 +1,5 @@
-import type { MapProductPricePerAmount, Product } from "@/types";
+import type { Product } from "@/types";
 import {
-  mapPricePerAmount,
   checkEqualProductValues,
   findProductById,
   findProductCheapest,

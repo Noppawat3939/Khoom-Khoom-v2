@@ -1,10 +1,18 @@
 import React, { type FC } from "react";
 import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
-import { Button, Card, CardBody, CardFooter, Chip } from "@nextui-org/react";
+import {
+  Badge,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Chip,
+} from "@nextui-org/react";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import type { CardProductMobileSizeProps } from "./card-product-type";
 import { BsFillBoxFill } from "react-icons/bs";
+import { isEmpty } from "lodash";
 
 const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   onRemove,
@@ -15,6 +23,7 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
   id,
   selected,
   onSelectedIdChange,
+  quantity,
 }) => {
   const {
     state: { theme },
@@ -43,15 +52,23 @@ const CardProductMobileSize: FC<CardProductMobileSizeProps> = ({
             aria-label="product-name"
             className="flex items-center space-x-2"
           >
-            <BsFillBoxFill
-              className={`${
-                isSelected && theme.dark
-                  ? " text-[#F5A524]"
-                  : isSelected && theme.light
-                  ? "text-green-400"
-                  : "text-foreground-300"
-              } ${isSelected ? "drop-shadow-md" : "drop-shadow-none"} w-6 h-6 `}
-            />
+            <Badge
+              content={`x${isEmpty(quantity) ? 1 : Number(quantity)}`}
+              variant="shadow"
+              className="text-foreground-500"
+            >
+              <BsFillBoxFill
+                className={`${
+                  isSelected && theme.dark
+                    ? " text-[#F5A524]"
+                    : isSelected && theme.light
+                    ? "text-green-400"
+                    : "text-foreground-300"
+                } ${
+                  isSelected ? "drop-shadow-md" : "drop-shadow-none"
+                } w-6 h-6 `}
+              />
+            </Badge>
             <span className="text-xl">{productName}</span>
           </span>
           <span className="flex space-x-2">

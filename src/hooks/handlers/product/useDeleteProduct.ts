@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
+import type { RemoveProductParam } from "@/types";
+import { VARIABLE_CONTENT } from "@/constants";
 import { useGetContents } from "@/hooks";
 import { useModalStore, useProductsStore } from "@/stores";
-import type { RemoveProductParam } from "@/types";
 import { _string } from "@/utils";
 import { useCallback, useTransition } from "react";
 
@@ -34,7 +34,7 @@ const useDeleteProduct = () => {
 
   const deleteProductContent = {
     title: content?.delete_product.title.replaceAll(
-      "{{}}",
+      VARIABLE_CONTENT,
       _string(product?.productName)
     ),
     delete_btn: _string(content?.delete_product.delete_btn),

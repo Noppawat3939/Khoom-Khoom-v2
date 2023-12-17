@@ -3,6 +3,7 @@ import {
   checkEqualProductValues,
   findProductById,
   findProductCheapest,
+  toUpperCase,
 } from "@/utils";
 import { HttpStatusCode } from "axios";
 import { isArray, isUndefined } from "lodash";
@@ -13,7 +14,7 @@ export const POST = async (req: Request) => {
 
   if (!isArray(products))
     return NextResponse.json(
-      { message: "Product value is invalid", error: true },
+      { message: toUpperCase("Product value is invalid"), error: true },
       { status: HttpStatusCode.BadRequest }
     );
 
@@ -44,7 +45,7 @@ export const POST = async (req: Request) => {
     });
   } catch (error) {
     return NextResponse.json(
-      { message: "Something went wrong", error: true },
+      { message: toUpperCase("Something went wrong"), error: true },
       { status: HttpStatusCode.InternalServerError }
     );
   }

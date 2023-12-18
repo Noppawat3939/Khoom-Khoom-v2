@@ -1,4 +1,4 @@
-import { EMPTY_STRING, VARIABLE_CONTENT } from "@/constants";
+import { EMPTY_STRING, VARIABLE_CONTENT, ZERO } from "@/constants";
 import { useGetContents } from "@/hooks";
 import { useModalStore } from "@/stores";
 import { _string } from "@/utils";
@@ -36,7 +36,10 @@ const useCompareProducts = () => {
       return {
         title: _string(
           content?.compare_product.cheapest_one_product_title
-        ).replaceAll(VARIABLE_CONTENT, `${comparedData?.cheaperPercent || 0}`),
+        ).replaceAll(
+          VARIABLE_CONTENT,
+          `${comparedData?.cheaperPercent || ZERO}`
+        ),
         size: hasOne
           ? _string(content?.compare_product.cheapest_one_product_size)
           : EMPTY_STRING,

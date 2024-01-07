@@ -29,8 +29,6 @@ const useHandleBanner = () => {
 
   const canCompare = products.length ? products.length >= 2 : false;
 
-  console.log(products);
-
   const {
     action: {
       handleOpenCreateProduct,

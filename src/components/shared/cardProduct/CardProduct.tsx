@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import { useAppTheme, useRenderContentCardProduct } from "@/hooks";
-import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Tooltip } from "@nextui-org/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoPricetagOutline } from "react-icons/io5";
 import { MdDriveFileRenameOutline } from "react-icons/md";
@@ -56,20 +56,27 @@ const CardProduct: FC<CardProductProps> = ({
               className="shadow-none border-none max-h-[180px] max-w-[80px] max-md:h-[140px] max-sm:h-[160px] duration-250 transition-all hover:scale-125"
               src={productImage}
             />
-            <span className="absolute bottom-0 right-0 text-foreground-400">
-              {`x${isEmpty(quantity) ? 1 : Number(quantity)}`}
-            </span>
+            <Tooltip content={content.tooltipContent.quantity}>
+              <span
+                aria-label="quantity-product"
+                className="absolute bottom-0 right-0 text-foreground-400"
+              >
+                {`x${isEmpty(quantity) ? 1 : Number(quantity)}`}
+              </span>
+            </Tooltip>
           </div>
-          <Button
-            isIconOnly
-            onClick={() => onUpdate(id)}
-            variant="ghost"
-            size="sm"
-            aria-label="update-product-btn"
-            className="absolute rounded-lg top-1 right-1 z-10 shadow-sm"
-          >
-            <FaRegEdit className="w-6 h-6 p-1 text-foreground-400" />
-          </Button>
+          <Tooltip content={content.tooltipContent.edit}>
+            <Button
+              isIconOnly
+              onClick={() => onUpdate(id)}
+              variant="ghost"
+              size="sm"
+              aria-label="update-product-btn"
+              className="absolute rounded-lg top-1 right-1 z-10 shadow-sm"
+            >
+              <FaRegEdit className="w-6 h-6 p-1 text-foreground-400" />
+            </Button>
+          </Tooltip>
         </div>
         <div className="flex items-center justify-between">
           <CardHeader className="px-0 w-fit text-xl flex items-center max-md:text-lg">
@@ -89,15 +96,18 @@ const CardProduct: FC<CardProductProps> = ({
               {content.size}
             </Chip>
           </CardHeader>
-          <Button
-            onClick={() => onRemove?.(id)}
-            size="sm"
-            isIconOnly
-            variant="light"
-            color="danger"
-          >
-            <FaRegTrashCan className="w-4 h-4" />
-          </Button>
+          <Tooltip content={content.tooltipContent.remove}>
+            <Button
+              onClick={() => onRemove?.(id)}
+              size="sm"
+              isIconOnly
+              variant="light"
+              color="danger"
+              aria-label="remove"
+            >
+              <FaRegTrashCan className="w-4 h-4" />
+            </Button>
+          </Tooltip>
         </div>
         <span className="flex items-center mt-auto space-x-1">
           <IoPricetagOutline

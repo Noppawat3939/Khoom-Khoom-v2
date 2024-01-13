@@ -1,55 +1,60 @@
 {
-    "main": {
-        "title_banner": "Khoom Khoom",
-        "description_banner": "Find the best product price for you.",
-        "description_compare_banner": "Why not compare your products?",
-        "start_btn_banner": "Get started",
-        "add_more_btn": "Add 1 more to compare.",
-        "compare_btn": "Compare products"
-    },
-    "create_product": {
-        "title": "Create product detail",
-        "product_name_label": "Product name",
-        "product_name_placeholder": "Chocolate",
-        "product_size_label": "Size or Amount",
-        "product_size_placeholder": "100 (number only)",
-        "product_quantity_label": "Quantity (per 1 piece)",
-        "product_quantity_placeholder": "1 (number only)",
-        "product_price_label": "Price (per 1 piece)",
-        "product_price_placeholder": "45 (number only)",
-        "submit_product_btn": "Create product",
-        "cancel_product_btn": "Cancel"
-    },
-    "update_product": {
-        "title": "Update '{{}}'",
-        "product_name_label": "Product name",
-        "product_name_placeholder": "Chocolate",
-        "product_size_label": "Size or Amount",
-        "product_size_placeholder": "100 (number only)",
-        "product_quantity_label": "Quantity (per 1 piece)",
-        "product_quantity_placeholder": "1 (number only)",
-        "product_price_label": "Price (per 1 piece)",
-        "product_price_placeholder": "45 (number only)",
-        "submit_product_btn": "Update product",
-        "cancel_product_btn": "Cancel"
-    },
-    "compare_product": {
-        "cheapest_one_product_title": "It is {{}}% cheaper.",
-        "cheapest_one_product_size": "size {{}}",
-        "equal_products_title": "have the same price.",
-        "close_btn": "Close"
-    },
-    "failed_modal": {
-        "title": "Sorry, something went wrong.",
-        "description": "please retry again"
-    },
-    "delete_product": {
-        "title": "Do you want to delete the {{}} ?",
-        "delete_btn": "Delete"
-    },
-    "product_details": {
-        "name_label": "Product name",
-        "price_label": "Price {{}} baht",
-        "size_label": "(size {{}})"
-    }
+  "main": {
+    "title_banner": "Khoom Khoom",
+    "description_banner": "Find the best product price for you.",
+    "description_compare_banner": "Why not compare your products?",
+    "start_btn_banner": "Get started",
+    "add_more_btn": "Add 1 more to compare.",
+    "compare_btn": "Compare products"
+  },
+  "create_product": {
+    "title": "Create product detail",
+    "product_name_label": "Product name",
+    "product_name_placeholder": "Chocolate",
+    "product_size_label": "Size or Amount",
+    "product_size_placeholder": "100 (number only)",
+    "product_quantity_label": "Quantity (per 1 piece)",
+    "product_quantity_placeholder": "1 (number only)",
+    "product_price_label": "Price (per 1 piece)",
+    "product_price_placeholder": "45 (number only)",
+    "submit_product_btn": "Create product",
+    "cancel_product_btn": "Cancel"
+  },
+  "update_product": {
+    "title": "Update '{{}}'",
+    "product_name_label": "Product name",
+    "product_name_placeholder": "Chocolate",
+    "product_size_label": "Size or Amount",
+    "product_size_placeholder": "100 (number only)",
+    "product_quantity_label": "Quantity (per 1 piece)",
+    "product_quantity_placeholder": "1 (number only)",
+    "product_price_label": "Price (per 1 piece)",
+    "product_price_placeholder": "45 (number only)",
+    "submit_product_btn": "Update product",
+    "cancel_product_btn": "Cancel"
+  },
+  "compare_product": {
+    "cheapest_one_product_title": "It is {{}}% cheaper.",
+    "cheapest_one_product_size": "size {{}}",
+    "equal_products_title": "have the same price.",
+    "close_btn": "Close"
+  },
+  "failed_modal": {
+    "title": "Sorry, something went wrong.",
+    "description": "please retry again"
+  },
+  "delete_product": {
+    "title": "Do you want to delete the {{}} ?",
+    "delete_btn": "Delete"
+  },
+  "product_details": {
+    "name_label": "Product name",
+    "price_label": "Price {{}} baht",
+    "size_label": "(size {{}})"
+  },
+  "card_product": {
+    "edit_tooltip": "edit detail",
+    "remove_tooltip": "remove product",
+    "quantity_tooltip": "product quantity"
+  }
 }

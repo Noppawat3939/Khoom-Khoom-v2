@@ -22,6 +22,11 @@ const useRenderContentCardProduct = (
         params.size
       )
     ),
+    tooltipContent: {
+      edit: _string(content?.card_product.edit_tooltip),
+      remove: _string(content?.card_product.remove_tooltip),
+      quantity: _string(content?.card_product.quantity_tooltip),
+    },
   };
 
   return { content: productDetailsContent };

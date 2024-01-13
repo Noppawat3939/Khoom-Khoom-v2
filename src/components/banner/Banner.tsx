@@ -70,6 +70,7 @@ const Banner: FC<BannerProps> = ({
           }`}
           variant="bordered"
           about="create-product-btn"
+          role="create"
         >
           {isString(textBtn) && textBtn}
         </Button>
@@ -82,6 +83,7 @@ const Banner: FC<BannerProps> = ({
               theme.dark ? "text-foreground-100" : "text-gray-400"
             }`}
             variant="bordered"
+            role="create"
             about="create-product-btn"
           >
             {isObject(textBtn) && textBtn.add}
@@ -94,11 +96,14 @@ const Banner: FC<BannerProps> = ({
               className={`text-lg ${
                 theme.dark
                   ? "text-foreground-700"
-                  : "text-gray-100 bg-[#1B9C85]"
+                  : `text-gray-100 ${
+                      selected.length === 0 ? "bg-slate-400" : "bg-[#1B9C85]"
+                    }`
               }`}
               variant={theme.dark ? "shadow" : "solid"}
               color="default"
               about="compare-product-btn"
+              role="compare"
             >
               {isObject(textBtn) && textBtn.compare}
             </Button>

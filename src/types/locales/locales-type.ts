@@ -33,6 +33,11 @@ type DeleteProductContent = "title" | "delete_btn";
 
 type ProductDetailsContent = "name_label" | "price_label" | "size_label";
 
+type CardProductContent =
+  | "edit_tooltip"
+  | "remove_tooltip"
+  | "quantity_tooltip";
+
 export interface ContentByLocale {
   main: Record<MainContent, string>;
   create_product: Record<ProductFormContent, string>;
@@ -41,4 +46,5 @@ export interface ContentByLocale {
   failed_modal: Record<FailedModalContent, string>;
   delete_product: Record<DeleteProductContent, string>;
   product_details: Record<ProductDetailsContent, string>;
+  card_product: Record<CardProductContent, string>;
 }
